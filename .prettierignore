@@ -1,0 +1,15 @@
+# Build artifacts
+build/
+dist/
+coverage/
+
+# Node modules
+node_modules/
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Other files to ignore
+.eslintcache
+.DS_Store 
