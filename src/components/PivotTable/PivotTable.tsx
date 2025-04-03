@@ -1,8 +1,7 @@
-import React from 'react';
-import Header from './Header';
-import Row from './Row';
-import Cell from './Cell';
+import React, { useMemo } from 'react';
 import { Order } from '../../hooks/useFetchOrders';
+import PivotTableHeader from "../PivotTableHeader/PivotTableHeader";
+import './PivotTable.css';
 
 interface PivotTableProps {
   orders: Order[];
@@ -11,7 +10,7 @@ interface PivotTableProps {
 export const PivotTable = ({ orders }: PivotTableProps) => {
   return (
     <div className="pivot-table">
-      <Header />
+      <PivotTableHeader orders={orders} />
       {/* TODO: Map through data to create rows */}
     </div>
   );

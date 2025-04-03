@@ -1,4 +1,5 @@
 import React from 'react';
+import './PivotTableCell.css';
 
 interface PivotTableCellProps {
   // TODO: Add props interface

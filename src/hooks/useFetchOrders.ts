@@ -1,15 +1,27 @@
 import { useState, useEffect } from 'react';
 
 export interface Order {
-  id: string;
-  date: string;
-  customer: string;
-  product: string;
-  quantity: number;
-  price: number;
-  total: number;
-  status: string;
+  rowId: number;
+  orderId: string;
+  orderDate: string;
+  shipDate: string;
+  shipMode: string;
+  customerId: string;
+  customerName: string;
+  segment: string;
+  country: string;
+  city: string;
+  state: string;
+  postalCode: number;
   region: string;
+  productId: string;
+  category: string;
+  subCategory: string;
+  productName: string;
+  sales: number;
+  quantity: number;
+  discount: number;
+  profit: number;
 }
 
 export const useFetchOrders = () => {

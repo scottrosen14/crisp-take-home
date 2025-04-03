@@ -1,0 +1,37 @@
+.pivot-table-cell {
+  padding: 10px 15px;
+  flex: 1;
+  min-width: 100px;
+  border-right: 1px solid #e0e0e0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pivot-table-cell:last-child {
+  border-right: none;
+}
+
+.pivot-table-cell.numeric {
+  text-align: right;
+}
+
+.pivot-table-cell.date {
+  text-align: center;
+}
+
+.pivot-table-cell.status {
+  font-weight: 500;
+}
+
+.pivot-table-cell.status.completed {
+  color: #4caf50;
+}
+
+.pivot-table-cell.status.pending {
+  color: #ff9800;
+}
+
+.pivot-table-cell.status.cancelled {
+  color: #f44336;
+} 
