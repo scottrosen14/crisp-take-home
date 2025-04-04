@@ -39,13 +39,11 @@ const categoryStyle: React.CSSProperties = {
 };
 
 const PivotTable: React.FC<Props> = ({ data }) => {
-  // Get all unique states
   const states = useMemo(() => {
     const stateSet = new Set(data.map((d) => d.state));
     return Array.from(stateSet).sort();
   }, [data]);
 
-  // Get pivot structure
   const pivotRows = useMemo(() => {
     const grouped: {
       [category: string]: {
