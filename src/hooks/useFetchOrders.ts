@@ -1,28 +1,5 @@
-import { useState, useEffect } from 'react';
-
-export interface Order {
-  rowId: number;
-  orderId: string;
-  orderDate: string;
-  shipDate: string;
-  shipMode: string;
-  customerId: string;
-  customerName: string;
-  segment: string;
-  country: string;
-  city: string;
-  state: string;
-  postalCode: number;
-  region: string;
-  productId: string;
-  category: string;
-  subCategory: string;
-  productName: string;
-  sales: number;
-  quantity: number;
-  discount: number;
-  profit: number;
-}
+import {useEffect, useState} from 'react';
+import {Order} from "../constants";
 
 export const useFetchOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
