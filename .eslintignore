@@ -1,0 +1,32 @@
+# Build artifacts
+build/
+dist/
+coverage/
+
+# Node modules
+node_modules/
+
+# Config files
+*.config.js
+config/
+
+# Public assets
+public/
+
+# Other files to ignore
+.eslintcache
+
+# Build outputs
+cdk.out/
+
+# Config files
+.eslintrc.js
+jest.*.config.ts
+
+# CDK asset files
+*.d.ts
+cdk.context.json
+outputs.json
+
+# Environment files
+.env* 
