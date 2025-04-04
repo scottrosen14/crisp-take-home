@@ -13,8 +13,7 @@ function App() {
 
   return (
     <div>
-      <PivotTable orders={orders} />
-      {/* Other components that might need orders data */}
+      <PivotTable data={orders} />
     </div>
   );
 }

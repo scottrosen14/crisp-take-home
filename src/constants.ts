@@ -1,23 +1,23 @@
-export enum OrderFields {
-  RowId = 'rowId',
-  OrderId = 'orderId',
-  OrderDate = 'orderDate',
-  ShipDate = 'shipDate',
-  ShipMode = 'shipMode',
-  CustomerId = 'customerId',
-  CustomerName = 'customerName',
-  Segment = 'segment',
-  Country = 'country',
-  City = 'city',
-  State = 'state',
-  PostalCode = 'postalCode',
-  Region = 'region',
-  ProductId = 'productId',
-  Category = 'category',
-  SubCategory = 'subCategory',
-  ProductName = 'productName',
-  Sales = 'sales',
-  Quantity = 'quantity',
-  Discount = 'discount',
-  Profit = 'profit',
+export interface Order {
+  rowId: number;
+  orderId: string;
+  orderDate: string;
+  shipDate: string;
+  shipMode: string;
+  customerId: string;
+  customerName: string;
+  segment: string;
+  country: string;
+  city: string;
+  state: string;
+  postalCode: number;
+  region: string;
+  productId: string;
+  category: string;
+  subCategory: string;
+  productName: string;
+  sales: number;
+  quantity: number;
+  discount: number;
+  profit: number;
 }
