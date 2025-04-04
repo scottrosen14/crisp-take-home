@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
-import {Order} from "../../constants";
-import PivotTableBody from "../PivotTableBody/PivotTableBody";
-import PivotTableHeader from "../PivotTableHeader/PivotTableHeader";
+import React, { useMemo } from 'react';
+import { Order } from '../../constants';
+import PivotTableBody from '../PivotTableBody/PivotTableBody';
+import PivotTableHeader from '../PivotTableHeader/PivotTableHeader';
 
 interface PivotData {
   [category: string]: {
@@ -14,33 +14,33 @@ interface Props {
 }
 
 const tableStyle: React.CSSProperties = {
-  borderCollapse: "collapse",
-  width: "80%",
-  margin: "20px auto",
-  fontFamily: "Arial, sans-serif",
+  borderCollapse: 'collapse',
+  width: '80%',
+  margin: '20px auto',
+  fontFamily: 'Arial, sans-serif',
 };
 
 const thStyle: React.CSSProperties = {
-  backgroundColor: "#f4f4f4",
-  padding: "12px 16px",
-  border: "1px solid #ddd",
-  textAlign: "left",
+  backgroundColor: '#f4f4f4',
+  padding: '12px 16px',
+  border: '1px solid #ddd',
+  textAlign: 'left',
   fontWeight: 600,
 };
 
 const tdStyle: React.CSSProperties = {
-  padding: "10px 14px",
-  border: "1px solid #ddd",
+  padding: '10px 14px',
+  border: '1px solid #ddd',
 };
 
 const categoryStyle: React.CSSProperties = {
   fontWeight: 500,
-  backgroundColor: "#fafafa",
+  backgroundColor: '#fafafa',
 };
 
 const PivotTable: React.FC<Props> = ({ data }) => {
   const states = useMemo(() => {
-    const stateSet = new Set(data.map((d) => d.state));
+    const stateSet = new Set(data.map(d => d.state));
     return Array.from(stateSet).sort();
   }, [data]);
 
@@ -66,8 +66,8 @@ const PivotTable: React.FC<Props> = ({ data }) => {
   }, [data]);
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ borderCollapse: "collapse", width: "100%", fontFamily: "Arial, sans-serif" }}>
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: 'Arial, sans-serif' }}>
         <PivotTableHeader states={states} />
         <PivotTableBody pivotRows={pivotRows} states={states} />
       </table>
