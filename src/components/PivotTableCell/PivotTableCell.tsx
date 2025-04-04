@@ -6,11 +6,7 @@ interface PivotTableCellProps {
 }
 
 const PivotTableCell: React.FC<PivotTableCellProps> = () => {
-  return (
-    <div className="pivot-table-cell">
-      {/* TODO: Implement cell structure */}
-    </div>
-  );
+  return <div className="pivot-table-cell">{/* TODO: Implement cell structure */}</div>;
 };
 
-export default PivotTableCell; 
+export default PivotTableCell;

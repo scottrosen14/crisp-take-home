@@ -34,11 +34,11 @@ export const useFetchOrders = () => {
       try {
         setLoading(true);
         const response = await fetch('/sales-orders.json');
-        
+
         if (!response.ok) {
           throw new Error(`Error: Unable to fetch orders`);
         }
-        
+
         const data: Order[] = await response.json();
         setOrders(data);
         setError(null);

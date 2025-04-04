@@ -8,9 +8,9 @@ interface Props {
 const PivotTableRow: FC<Props> = () => {
   return (
     <div className="pivot-table-row">
-      {/* TODO: Implement row structure */}
+      <tr></tr>
     </div>
   );
 };
 
-export default PivotTableRow; 
+export default PivotTableRow;
