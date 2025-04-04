@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {Order} from "../constants";
+import { useEffect, useState } from 'react';
+import { Order } from '../constants';
 
 export const useFetchOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
