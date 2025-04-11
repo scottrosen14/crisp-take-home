@@ -1,55 +1,40 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import './PivotTableHeader.css';
 
 interface Props {
   states: string[];
 }
 
-const thStyle: React.CSSProperties = {
-  backgroundColor: '#008885',
-  padding: '12px 16px',
-  textAlign: 'left',
-  fontWeight: 600,
-  color: '#FFFFFF',
-};
-
-const PivotTableHeader: React.FC<Props> = ({ states }) => {
+const PivotTableHeader = ({ states }: Props): ReactElement => {
   return (
     <thead>
-      <tr style={{ backgroundColor: '#1e2a78', color: 'white' }}>
+      <tr className="pivot-table-header-row">
         <th
           colSpan={2}
-          style={{ padding: '10px', textAlign: 'left', fontSize: '14px', fontWeight: 'bold' }}
+          className="products-header"
         >
           PRODUCTS
         </th>
         <th
-          style={{
-            padding: '10px',
-            textAlign: 'center',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            position: 'sticky',
-            left: '50%',
-            transform: 'translateX(-50%)'
-          }}
+          className="states-header"
         >
           STATES
         </th>
         <th
           colSpan={states.length + 1}
-          style={{ padding: '10px', textAlign: 'center', fontSize: '14px', fontWeight: 'bold' }}
+          className="products-header"
         >
         </th>
       </tr>
       <tr>
-        <th style={thStyle}>Category</th>
-        <th style={thStyle}>Sub-Category</th>
+        <th className="column-header">Category</th>
+        <th className="column-header">Sub-Category</th>
         {states.map(state => (
-          <th key={state} style={thStyle}>
+          <th key={state} className="column-header">
             {state}
           </th>
         ))}
-        <th style={thStyle}>Total</th>
+        <th className="column-header">Total</th>
       </tr>
     </thead>
   );
