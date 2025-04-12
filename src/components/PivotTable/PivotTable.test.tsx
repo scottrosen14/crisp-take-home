@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import PivotTable from './PivotTable';
-import PivotBody from '../PivotTableBody/PivotBody';
+import PivotBody from '../PivotBody/PivotBody';
 import { Order } from '../../constants';
 
 describe('PivotTable', () => {

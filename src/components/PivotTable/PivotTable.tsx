@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Order } from '../../constants';
-import PivotBody from '../PivotTableBody/PivotBody';
-import PivotHeader from '../PivotTableHeader/PivotHeader';
+import PivotBody from '../PivotBody/PivotBody';
+import PivotHeader from '../PivotHeader/PivotHeader';
 
 interface PivotData {
   [category: string]: {
@@ -12,31 +12,6 @@ interface PivotData {
 interface Props {
   data: Order[];
 }
-
-const tableStyle: React.CSSProperties = {
-  borderCollapse: 'collapse',
-  width: '80%',
-  margin: '20px auto',
-  fontFamily: 'Arial, sans-serif',
-};
-
-const thStyle: React.CSSProperties = {
-  backgroundColor: '#f4f4f4',
-  padding: '12px 16px',
-  border: '1px solid #ddd',
-  textAlign: 'left',
-  fontWeight: 600,
-};
-
-const tdStyle: React.CSSProperties = {
-  padding: '10px 14px',
-  border: '1px solid #ddd',
-};
-
-const categoryStyle: React.CSSProperties = {
-  fontWeight: 500,
-  backgroundColor: '#fafafa',
-};
 
 const PivotTable: React.FC<Props> = ({ data }) => {
   const states = useMemo(() => {

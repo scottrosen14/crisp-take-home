@@ -1,4 +1,5 @@
 import React from 'react';
+import { tdStyle, categoryStyle, totalRowStyle, grandTotalRowStyle } from './PivotBody.styles';
 
 interface Props {
   pivotRows: {
@@ -10,27 +11,6 @@ interface Props {
   };
   states: string[];
 }
-
-const tdStyle: React.CSSProperties = {
-  padding: '10px 14px',
-  border: '1px solid #ddd',
-};
-
-const categoryStyle: React.CSSProperties = {
-  fontWeight: 500,
-  backgroundColor: '#fafafa',
-};
-
-const totalRowStyle: React.CSSProperties = {
-  fontWeight: 600,
-  backgroundColor: '#f0f0f0',
-};
-
-const grandTotalRowStyle: React.CSSProperties = {
-  fontWeight: 700,
-  backgroundColor: '#e0e0e0',
-  fontSize: '1.05em',
-};
 
 const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
   // Calculate grand totals across all categories
