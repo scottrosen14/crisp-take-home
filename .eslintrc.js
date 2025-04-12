@@ -11,6 +11,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    jest: true
   },
   settings: {
     react: {
@@ -26,7 +27,10 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'warn',
     'no-console': 'off',
     'prefer-const': 'warn',
-    'no-var': 'warn'
+    'no-var': 'warn',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'warn',
+    'react/jsx-max-props-per-line': ['error', { 'maximum': 3, 'when': 'multiline' }]
   },
   overrides: [
     {
