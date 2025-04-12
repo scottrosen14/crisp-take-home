@@ -32,7 +32,7 @@ const grandTotalRowStyle: React.CSSProperties = {
   fontSize: '1.05em',
 };
 
-const PivotTableBody: React.FC<Props> = ({ pivotRows, states }) => {
+const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
   // Calculate grand totals across all categories
   const grandTotals: { [state: string]: number } = {};
   let grandTotal = 0;
@@ -133,4 +133,4 @@ const PivotTableBody: React.FC<Props> = ({ pivotRows, states }) => {
   );
 };
 
-export default PivotTableBody;
+export default PivotBody;

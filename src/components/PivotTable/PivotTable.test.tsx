@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import PivotTable from './PivotTable';
-import PivotTableBody from '../PivotTableBody/PivotTableBody';
+import PivotBody from '../PivotTableBody/PivotBody';
 import { Order } from '../../constants';
 
 describe('PivotTable', () => {
@@ -139,7 +139,7 @@ describe('PivotTable', () => {
       },
     };
 
-    const { container } = render(<PivotTableBody pivotRows={pivotRows} states={states} />);
+    const { container } = render(<PivotBody pivotRows={pivotRows} states={states} />);
 
     // Check category totals
     const categoryTotalCells = Array.from(container.querySelectorAll('td')).filter(
@@ -185,7 +185,7 @@ describe('PivotTable', () => {
       },
     };
 
-    const { container } = render(<PivotTableBody pivotRows={pivotRows} states={states} />);
+    const { container } = render(<PivotBody pivotRows={pivotRows} states={states} />);
 
     // Check that TX column shows '-' for missing values
     const cells = Array.from(container.querySelectorAll('td'));

@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
-import './PivotTableHeader.css';
+import './PivotHeader.css';
 
 interface Props {
   states: string[];
 }
 
-const PivotTableHeader = ({ states }: Props): ReactElement => {
+const PivotHeader = ({ states }: Props): ReactElement => {
   return (
     <thead>
       <tr className="pivot-table-header-row">
@@ -29,4 +29,4 @@ const PivotTableHeader = ({ states }: Props): ReactElement => {
   );
 };
 
-export default PivotTableHeader;
+export default PivotHeader;

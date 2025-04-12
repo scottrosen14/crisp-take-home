@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Order } from '../../constants';
-import PivotTableBody from '../PivotTableBody/PivotTableBody';
-import PivotTableHeader from '../PivotTableHeader/PivotTableHeader';
+import PivotBody from '../PivotTableBody/PivotBody';
+import PivotHeader from '../PivotTableHeader/PivotHeader';
 
 interface PivotData {
   [category: string]: {
@@ -68,8 +68,8 @@ const PivotTable: React.FC<Props> = ({ data }) => {
   return (
     <div style={{ overflowX: 'auto' }}>
       <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: 'Arial, sans-serif' }}>
-        <PivotTableHeader states={states} />
-        <PivotTableBody pivotRows={pivotRows} states={states} />
+        <PivotHeader states={states} />
+        <PivotBody pivotRows={pivotRows} states={states} />
       </table>
     </div>
   );
