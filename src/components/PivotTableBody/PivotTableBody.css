@@ -1,0 +1,20 @@
+.td {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+}
+
+.category {
+  font-weight: 500;
+  background-color: #fafafa;
+}
+
+.total-row {
+  font-weight: 600;
+  background-color: #f0f0f0;
+}
+
+.grand-total-row {
+  font-weight: 700;
+  background-color: #e0e0e0;
+  font-size: 1.05em;
+}

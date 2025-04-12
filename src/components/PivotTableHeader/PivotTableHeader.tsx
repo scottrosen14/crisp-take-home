@@ -9,22 +9,11 @@ const PivotTableHeader = ({ states }: Props): ReactElement => {
   return (
     <thead>
       <tr className="pivot-table-header-row">
-        <th
-          colSpan={2}
-          className="products-header"
-        >
+        <th colSpan={2} className="products-header">
           PRODUCTS
         </th>
-        <th
-          className="states-header"
-        >
-          STATES
-        </th>
-        <th
-          colSpan={states.length + 1}
-          className="products-header"
-        >
-        </th>
+        <th className="states-header">STATES</th>
+        <th colSpan={states.length + 1} className="products-header"></th>
       </tr>
       <tr>
         <th className="column-header">Category</th>

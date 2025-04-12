@@ -36,12 +36,12 @@ const PivotTableBody: React.FC<Props> = ({ pivotRows, states }) => {
   // Calculate grand totals across all categories
   const grandTotals: { [state: string]: number } = {};
   let grandTotal = 0;
-  
+
   // Initialize grand totals
   states.forEach(state => {
     grandTotals[state] = 0;
   });
-  
+
   // Calculate grand totals
   Object.values(pivotRows).forEach(subCategories => {
     Object.values(subCategories).forEach(stateValues => {
@@ -116,13 +116,10 @@ const PivotTableBody: React.FC<Props> = ({ pivotRows, states }) => {
           </React.Fragment>
         );
       })}
-      
+
       {/* Grand total row */}
       <tr style={grandTotalRowStyle}>
-        <td 
-          colSpan={2} 
-          style={{ ...tdStyle, ...grandTotalRowStyle }}
-        >
+        <td colSpan={2} style={{ ...tdStyle, ...grandTotalRowStyle }}>
           Grand Total
         </td>
         {states.map(state => (
@@ -130,9 +127,7 @@ const PivotTableBody: React.FC<Props> = ({ pivotRows, states }) => {
             {grandTotals[state]?.toLocaleString() || '-'}
           </td>
         ))}
-        <td style={{ ...tdStyle, ...grandTotalRowStyle }}>
-          {grandTotal.toLocaleString()}
-        </td>
+        <td style={{ ...tdStyle, ...grandTotalRowStyle }}>{grandTotal.toLocaleString()}</td>
       </tr>
     </tbody>
   );
