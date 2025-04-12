@@ -1,10 +1,10 @@
 import { getUniqueStates, groupDataForPivot } from '../pivotTableUtils';
-import { mockData } from './mockData';
+import { mockOrders } from '../../mocks/mockOrders';
 
 describe('pivotTableUtils', () => {
   describe('getUniqueStates', () => {
     it('should return unique states sorted alphabetically', () => {
-      const result = getUniqueStates(mockData);
+      const result = getUniqueStates(mockOrders);
       expect(result).toEqual(['CA', 'NY']);
     });
 
@@ -16,8 +16,8 @@ describe('pivotTableUtils', () => {
 
   describe('groupDataForPivot', () => {
     it('should group data correctly by category, subcategory, and state', () => {
-      const result = groupDataForPivot(mockData);
-      
+      const result = groupDataForPivot(mockOrders);
+
       expect(result).toEqual({
         Electronics: {
           Phones: {
@@ -41,4 +41,4 @@ describe('pivotTableUtils', () => {
       expect(result).toEqual({});
     });
   });
-}); 
+});

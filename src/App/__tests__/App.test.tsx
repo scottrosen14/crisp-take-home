@@ -2,13 +2,15 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 import { useFetchOrders } from '../../hooks/useFetchOrders';
-import { mockOrders } from '../../__mocks__/mockOrders';
+import { mockOrders } from '../../mocks/mockOrders';
 
 // Mock the useFetchOrders hook
 jest.mock('../../hooks/useFetchOrders');
 
 describe('App Component', () => {
-  const mockUseFetchOrders = useFetchOrders as jest.MockedFunction<typeof useFetchOrders>;
+  const mockUseFetchOrders = useFetchOrders as jest.MockedFunction<
+    typeof useFetchOrders
+  >;
 
   beforeEach(() => {
     // Clear all mocks before each test
@@ -52,4 +54,4 @@ describe('App Component', () => {
     // Since PivotTable is rendered, we should see the table structure
     expect(screen.getByRole('table')).toBeInTheDocument();
   });
-}); 
+});

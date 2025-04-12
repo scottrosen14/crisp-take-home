@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Order } from '../constants';
 
+// TODO: Write tests for the useFetchOrders hook to ensure it handles loading, success, and error states correctly.
+
 export const useFetchOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,7 +22,9 @@ export const useFetchOrders = () => {
         setOrders(data);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : `Error: Unable to fetch orders`);
+        setError(
+          err instanceof Error ? err.message : `Error: Unable to fetch orders`
+        );
         setOrders([]);
       } finally {
         setLoading(false);
