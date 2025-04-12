@@ -1,5 +1,10 @@
 import React, { ReactElement } from 'react';
-import { headerRowStyle, productsHeaderStyle, statesHeaderStyle, columnHeaderStyle } from './PivotHeader.styles';
+import {
+  headerRowStyle,
+  productsHeaderStyle,
+  statesHeaderStyle,
+  columnHeaderStyle,
+} from './PivotHeader.styles';
 
 interface Props {
   states: string[];
