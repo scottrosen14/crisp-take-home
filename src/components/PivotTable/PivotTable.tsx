@@ -2,43 +2,15 @@ import React, { useMemo } from 'react';
 import { Order } from '../../constants';
 import PivotBody from '../PivotBody/PivotBody';
 import PivotHeader from '../PivotHeader/PivotHeader';
-
-interface PivotData {
-  [category: string]: {
-    [subCategory: string]: number;
-  };
-}
+import { getUniqueStates, groupDataForPivot } from '../../utils/pivotTableUtils';
 
 interface Props {
   data: Order[];
 }
 
 const PivotTable: React.FC<Props> = ({ data }) => {
-  const states = useMemo(() => {
-    const stateSet = new Set(data.map(d => d.state));
-    return Array.from(stateSet).sort();
-  }, [data]);
-
-  const pivotRows = useMemo(() => {
-    const grouped: {
-      [category: string]: {
-        [subCategory: string]: {
-          [state: string]: number;
-        };
-      };
-    } = {};
-
-    data.forEach(({ category, subCategory, state, sales }) => {
-      if (!grouped[category]) grouped[category] = {};
-      if (!grouped[category][subCategory]) grouped[category][subCategory] = {};
-      if (!grouped[category][subCategory][state]) {
-        grouped[category][subCategory][state] = 0;
-      }
-      grouped[category][subCategory][state] += sales;
-    });
-
-    return grouped;
-  }, [data]);
+  const states = useMemo(() => getUniqueStates(data), [data]);
+  const pivotRows = useMemo(() => groupDataForPivot(data), [data]);
 
   return (
     <div style={{ overflowX: 'auto' }}>

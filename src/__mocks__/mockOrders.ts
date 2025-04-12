@@ -1,0 +1,50 @@
+import { Order } from '../constants';
+
+export const mockOrders: Order[] = [
+  {
+    rowId: 1,
+    orderId: 'CA-2016-152156',
+    orderDate: '11/8/2016',
+    shipDate: '11/11/2016',
+    shipMode: 'Second Class',
+    customerId: 'CG-12520',
+    customerName: 'Claire Gute',
+    segment: 'Consumer',
+    country: 'United States',
+    city: 'Henderson',
+    state: 'California',
+    postalCode: 42420,
+    region: 'West',
+    productId: 'FUR-BO-10001798',
+    category: 'Furniture',
+    subCategory: 'Bookcases',
+    productName: 'Bush Somerset Collection Bookcase',
+    sales: 261.96,
+    quantity: 2,
+    discount: 0,
+    profit: 41.9136
+  },
+  {
+    rowId: 2,
+    orderId: 'CA-2016-152156',
+    orderDate: '11/8/2016',
+    shipDate: '11/11/2016',
+    shipMode: 'Second Class',
+    customerId: 'CG-12520',
+    customerName: 'Claire Gute',
+    segment: 'Consumer',
+    country: 'United States',
+    city: 'Henderson',
+    state: 'California',
+    postalCode: 42420,
+    region: 'West',
+    productId: 'FUR-CH-10000454',
+    category: 'Furniture',
+    subCategory: 'Chairs',
+    productName: 'Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back',
+    sales: 731.94,
+    quantity: 3,
+    discount: 0,
+    profit: 219.582
+  }
+]; 
