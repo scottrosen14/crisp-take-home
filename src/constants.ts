@@ -21,3 +21,15 @@ export interface Order {
   discount: number;
   profit: number;
 }
+
+export interface PivotRows {
+  [category: string]: {
+    [subCategory: string]: {
+      [state: string]: number;
+    };
+  };
+}
+
+export interface ColumnGrandTotals {
+  [columnName: string]: number;
+}

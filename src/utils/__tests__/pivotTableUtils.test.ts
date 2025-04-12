@@ -1,7 +1,11 @@
-import { getUniqueStates, groupDataForPivot } from '../pivotTableUtils';
+import {
+  calculateUltimateTotal,
+  getUniqueStates,
+  groupDataForPivot,
+} from '../pivotUtils';
 import { mockOrders } from '../../mocks/mockOrders';
 
-describe('pivotTableUtils', () => {
+describe('pivotUtils', () => {
   describe('getUniqueStates', () => {
     it('should return unique states sorted alphabetically', () => {
       const result = getUniqueStates(mockOrders);
@@ -13,7 +17,6 @@ describe('pivotTableUtils', () => {
       expect(result).toEqual([]);
     });
   });
-
   describe('groupDataForPivot', () => {
     it('should group data correctly by category, subcategory, and state', () => {
       const result = groupDataForPivot(mockOrders);
@@ -40,5 +43,10 @@ describe('pivotTableUtils', () => {
       const result = groupDataForPivot([]);
       expect(result).toEqual({});
     });
+  });
+  describe('ultimateGrandTotal', () => {
+    const mockUltimateGrandTotal = 1125711.76;
+    const total = calculateUltimateTotal();
+    expect(total).toEqual(mockUltimateGrandTotal);
   });
 });

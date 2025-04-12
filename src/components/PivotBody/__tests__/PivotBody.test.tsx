@@ -25,12 +25,12 @@ describe('PivotBody Component', () => {
   };
 
   it('renders with empty data', () => {
-    render(<PivotBody pivotRows={{}} states={[]} />);
+    render(<PivotBody pivotRows={{}} usStates={[]} />);
     expect(screen.getByText('Grand Total')).toBeInTheDocument();
   });
 
   it('renders with mock data', () => {
-    render(<PivotBody pivotRows={mockPivotRows} states={mockStates} />);
+    render(<PivotBody pivotRows={mockPivotRows} usStates={mockStates} />);
 
     // Check if categories are rendered
     expect(screen.getByText('Furniture')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('PivotBody Component', () => {
   });
 
   it('calculates totals correctly', () => {
-    render(<PivotBody pivotRows={mockPivotRows} states={mockStates} />);
+    render(<PivotBody pivotRows={mockPivotRows} usStates={mockStates} />);
 
     // Check category totals
     expect(screen.getByText('3,000')).toBeInTheDocument(); // Furniture total for California
@@ -73,7 +73,7 @@ describe('PivotBody Component', () => {
       },
     };
 
-    render(<PivotBody pivotRows={incompleteData} states={mockStates} />);
+    render(<PivotBody pivotRows={incompleteData} usStates={mockStates} />);
     expect(screen.getByText('-')).toBeInTheDocument();
   });
 });

@@ -28,4 +28,4 @@ export const columnHeaderStyle: CSSProperties = {
   textAlign: 'left',
   fontWeight: 600,
   color: '#ffffff',
-}; 
+};

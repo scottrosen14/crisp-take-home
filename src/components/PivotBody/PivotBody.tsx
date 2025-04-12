@@ -1,37 +1,23 @@
-import React from 'react';
-import { tdStyle, categoryStyle, totalRowStyle, grandTotalRowStyle } from './PivotBody.styles';
+import React, { ReactElement } from 'react';
+import {
+  categoryStyle,
+  grandTotalRowStyle,
+  tdStyle,
+  totalRowStyle,
+} from './PivotBody.styles';
+import { ColumnGrandTotals, PivotRows } from '../../constants';
+import { calculateGrandTotals } from '../../utils/pivotUtils';
 
 interface Props {
-  pivotRows: {
-    [category: string]: {
-      [subCategory: string]: {
-        [state: string]: number;
-      };
-    };
-  };
-  states: string[];
+  pivotRows: PivotRows;
+  usStates: string[];
 }
 
-const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
-  // Calculate grand totals across all categories
-  const grandTotals: { [state: string]: number } = {};
-  let grandTotal = 0;
-
-  // Initialize grand totals
-  states.forEach(state => {
-    grandTotals[state] = 0;
-  });
-
-  // Calculate grand totals
-  Object.values(pivotRows).forEach(subCategories => {
-    Object.values(subCategories).forEach(stateValues => {
-      states.forEach(state => {
-        const value = stateValues[state] || 0;
-        grandTotals[state] += value;
-        grandTotal += value;
-      });
-    });
-  });
+const PivotBody = ({ pivotRows, usStates }: Props): ReactElement => {
+  const { columnGrandTotals, ultimateGrandTotal } = calculateGrandTotals(
+    pivotRows,
+    usStates
+  );
 
   return (
     <tbody>
@@ -41,13 +27,13 @@ const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
         let categoryGrandTotal = 0;
 
         // Initialize totals
-        states.forEach(state => {
+        usStates.forEach(state => {
           categoryTotals[state] = 0;
         });
 
         // Calculate totals
         Object.values(subCategories).forEach(stateValues => {
-          states.forEach(state => {
+          usStates.forEach(state => {
             const value = stateValues[state] || 0;
             categoryTotals[state] += value;
             categoryGrandTotal += value;
@@ -56,35 +42,42 @@ const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
 
         return (
           <React.Fragment key={category}>
-            {Object.entries(subCategories).map(([subCategory, stateValues], index) => {
-              // Calculate row total
-              const rowTotal = states.reduce((sum, state) => sum + (stateValues[state] || 0), 0);
+            {Object.entries(subCategories).map(
+              ([subCategory, stateValues], index) => {
+                // Calculate row total
+                const rowTotal = usStates.reduce(
+                  (sum, state) => sum + (stateValues[state] || 0),
+                  0
+                );
 
-              return (
-                <tr key={`${category}-${subCategory}`}>
-                  {index === 0 && (
-                    <td
-                      style={{ ...tdStyle, ...categoryStyle }}
-                      rowSpan={Object.keys(subCategories).length + 1} // +1 for the total row
-                    >
-                      {category}
+                return (
+                  <tr key={`${category}-${subCategory}`}>
+                    {index === 0 && (
+                      <td
+                        style={{ ...tdStyle, ...categoryStyle }}
+                        rowSpan={Object.keys(subCategories).length + 1} // +1 for the total row
+                      >
+                        {category}
+                      </td>
+                    )}
+                    <td style={tdStyle}>{subCategory}</td>
+                    {usStates.map(state => (
+                      <td key={state} style={tdStyle}>
+                        {stateValues[state]?.toLocaleString() || '-'}
+                      </td>
+                    ))}
+                    <td style={{ ...tdStyle, fontWeight: 500 }}>
+                      {rowTotal.toLocaleString()}
                     </td>
-                  )}
-                  <td style={tdStyle}>{subCategory}</td>
-                  {states.map(state => (
-                    <td key={state} style={tdStyle}>
-                      {stateValues[state]?.toLocaleString() || '-'}
-                    </td>
-                  ))}
-                  <td style={{ ...tdStyle, fontWeight: 500 }}>{rowTotal.toLocaleString()}</td>
-                </tr>
-              );
-            })}
+                  </tr>
+                );
+              }
+            )}
 
             {/* Category total row */}
             <tr style={totalRowStyle}>
               <td style={{ ...tdStyle, ...totalRowStyle }}>Total</td>
-              {states.map(state => (
+              {usStates.map(state => (
                 <td key={state} style={{ ...tdStyle, ...totalRowStyle }}>
                   {categoryTotals[state]?.toLocaleString() || '-'}
                 </td>
@@ -102,12 +95,14 @@ const PivotBody: React.FC<Props> = ({ pivotRows, states }) => {
         <td colSpan={2} style={{ ...tdStyle, ...grandTotalRowStyle }}>
           Grand Total
         </td>
-        {states.map(state => (
-          <td key={state} style={{ ...tdStyle, ...grandTotalRowStyle }}>
-            {grandTotals[state]?.toLocaleString() || '-'}
+        {usStates.map(usState => (
+          <td key={usState} style={{ ...tdStyle, ...grandTotalRowStyle }}>
+            {columnGrandTotals[usState]?.toLocaleString() || '-'}
           </td>
         ))}
-        <td style={{ ...tdStyle, ...grandTotalRowStyle }}>{grandTotal.toLocaleString()}</td>
+        <td style={{ ...tdStyle, ...grandTotalRowStyle }}>
+          {ultimateGrandTotal.toLocaleString()}
+        </td>
       </tr>
     </tbody>
   );
