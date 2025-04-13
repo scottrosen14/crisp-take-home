@@ -12,7 +12,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div style={{ padding: '15px', backgroundColor: '#e6e9f0' }}>
       <PivotTable data={orders} />
     </div>
   );
