@@ -1,5 +1,5 @@
 import React, { ReactElement, useMemo } from 'react';
-import { Order } from '../../constants';
+import { Order } from '../../constants/constants';
 import PivotBody from '../PivotBody/PivotBody';
 import PivotHeader from '../PivotHeader/PivotHeader';
 import { getUniqueStates, groupPivotRowData } from '../../utils/pivotUtils';

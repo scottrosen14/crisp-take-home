@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { GroupedRowData } from '../../constants';
+import { GroupedRowData } from '../../constants/constants';
 import {
   calculateGrandTotals,
   calculateGroupTotals,

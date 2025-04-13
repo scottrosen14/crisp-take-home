@@ -4,7 +4,7 @@ import {
   GroupedRowData,
   SubGroup,
   GrandTotals,
-} from '../constants';
+} from '../constants/constants';
 
 export const getUniqueStates = (data: Order[]): string[] => {
   const stateSet = new Set(data.map(d => d.state));
@@ -83,8 +83,6 @@ export const calculateGroupTotals = (
       groupGrandTotal += value;
     });
   });
-
-  console.log('subGroupTotals', groupTotalsByColumn);
 
   return {
     groupTotalsByColumn,

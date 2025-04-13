@@ -1,5 +1,5 @@
-import { useFetchOrders } from '../hooks/useFetchOrders';
-import PivotTable from '../components/PivotTable/PivotTable';
+import { useFetchOrders } from '../../hooks/useFetchOrders';
+import PivotTable from '../PivotTable/PivotTable';
 
 function App() {
   const { orders, loading, error } = useFetchOrders();

@@ -1,5 +1,5 @@
 // TODO: Handle these floating points
-import { ColumnTotals } from '../constants';
+import { ColumnTotals } from '../constants/constants';
 
 export const mockColumnGrandTotals: ColumnTotals = {
   Alabama: 13899.380000000001,

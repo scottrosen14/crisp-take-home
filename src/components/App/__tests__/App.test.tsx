@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
-import { useFetchOrders } from '../../hooks/useFetchOrders';
-import { mockOrders } from '../../mocks/mockOrders';
+import { useFetchOrders } from '../../../hooks/useFetchOrders';
+import { mockOrders } from '../../../mocks/mockOrders';
 
 // Mock the useFetchOrders hook
 jest.mock('../../hooks/useFetchOrders');

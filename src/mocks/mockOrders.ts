@@ -1,4 +1,4 @@
-import { Order } from '../constants';
+import { Order } from '../constants/constants';
 
 export const mockOrders: Order[] = [
   {
