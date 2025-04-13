@@ -1,8 +1,15 @@
-import { useFetchOrders } from '../../hooks/useFetchOrders';
+import { useEffect } from 'react';
+import { fetchOrders } from '../../redux/features/ordersSlice';
 import PivotTable from '../PivotTable/PivotTable';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 function App() {
-  const { orders, loading, error } = useFetchOrders();
+  const dispatch = useAppDispatch();
+  const { orders, loading, error } = useAppSelector(state => state.orders);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   if (loading) {
     return <div>Loading orders...</div>;
