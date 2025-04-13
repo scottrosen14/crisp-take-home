@@ -2,7 +2,7 @@ import React, { ReactElement, useMemo } from 'react';
 import { Order } from '../../constants';
 import PivotBody from '../PivotBody/PivotBody';
 import PivotHeader from '../PivotHeader/PivotHeader';
-import { getUniqueStates, groupDataForPivot } from '../../utils/pivotUtils';
+import { getUniqueStates, groupPivotRowData } from '../../utils/pivotUtils';
 
 interface Props {
   data: Order[];
@@ -10,7 +10,7 @@ interface Props {
 
 const PivotTable = ({ data }: Props): ReactElement => {
   const states = useMemo(() => getUniqueStates(data), [data]);
-  const pivotRows = useMemo(() => groupDataForPivot(data), [data]);
+  const pivotRows = useMemo(() => groupPivotRowData(data), [data]);
 
   return (
     <div style={{ overflowX: 'auto' }}>

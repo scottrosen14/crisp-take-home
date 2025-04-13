@@ -1,7 +1,7 @@
 import {
   calculateUltimateTotal,
   getUniqueStates,
-  groupDataForPivot,
+  groupPivotRowData,
 } from '../pivotUtils';
 import { mockOrders } from '../../mocks/mockOrders';
 
@@ -19,7 +19,7 @@ describe('pivotUtils', () => {
   });
   describe('groupDataForPivot', () => {
     it('should group data correctly by category, subcategory, and state', () => {
-      const result = groupDataForPivot(mockOrders);
+      const result = groupPivotRowData(mockOrders);
 
       expect(result).toEqual({
         Electronics: {
@@ -40,7 +40,7 @@ describe('pivotUtils', () => {
     });
 
     it('should handle empty data', () => {
-      const result = groupDataForPivot([]);
+      const result = groupPivotRowData([]);
       expect(result).toEqual({});
     });
   });

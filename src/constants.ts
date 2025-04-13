@@ -22,7 +22,7 @@ export interface Order {
   profit: number;
 }
 
-export interface PivotRows {
+export interface GroupedRowData {
   [category: string]: {
     [subCategory: string]: {
       [state: string]: number;

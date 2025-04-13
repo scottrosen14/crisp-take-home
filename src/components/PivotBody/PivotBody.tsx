@@ -5,11 +5,11 @@ import {
   tdStyle,
   totalRowStyle,
 } from './PivotBody.styles';
-import { ColumnGrandTotals, PivotRows } from '../../constants';
+import { ColumnGrandTotals, GroupedRowData } from '../../constants';
 import { calculateGrandTotals } from '../../utils/pivotUtils';
 
 interface Props {
-  pivotRows: PivotRows;
+  pivotRows: GroupedRowData;
   usStates: string[];
 }
 
