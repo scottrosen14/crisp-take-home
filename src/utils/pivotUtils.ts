@@ -1,4 +1,10 @@
-import { ColumnGrandTotals, Order, GroupedRowData } from '../constants';
+import {
+  ColumnTotals,
+  Order,
+  GroupedRowData,
+  SubGroup,
+  GrandTotals,
+} from '../constants';
 
 export const getUniqueStates = (data: Order[]): string[] => {
   const stateSet = new Set(data.map(d => d.state));
@@ -32,8 +38,8 @@ export const calculateUltimateTotal = (): number => {
 export const calculateGrandTotals = (
   pivotRows: GroupedRowData,
   usStates: string[]
-): { columnGrandTotals: ColumnGrandTotals; ultimateGrandTotal: number } => {
-  const columnGrandTotals: ColumnGrandTotals = {};
+): { columnGrandTotals: GrandTotals; ultimateGrandTotal: number } => {
+  const columnGrandTotals: GrandTotals = {};
   let ultimateGrandTotal = 0;
 
   usStates.forEach(usState => {
@@ -56,5 +62,32 @@ export const calculateGrandTotals = (
   return {
     columnGrandTotals,
     ultimateGrandTotal,
+  };
+};
+
+export const calculateGroupTotals = (
+  usStates: string[],
+  subCategories: SubGroup
+): { groupTotalsByColumn: ColumnTotals; groupGrandTotal: number } => {
+  const groupTotalsByColumn: ColumnTotals = {};
+  let groupGrandTotal = 0;
+
+  usStates.forEach(state => {
+    groupTotalsByColumn[state] = 0;
+  });
+
+  Object.values(subCategories).forEach(stateValues => {
+    usStates.forEach(state => {
+      const value = stateValues[state] || 0;
+      groupTotalsByColumn[state] += value;
+      groupGrandTotal += value;
+    });
+  });
+
+  console.log('subGroupTotals', groupTotalsByColumn);
+
+  return {
+    groupTotalsByColumn,
+    groupGrandTotal,
   };
 };

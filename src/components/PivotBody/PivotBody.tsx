@@ -5,8 +5,11 @@ import {
   tdStyle,
   totalRowStyle,
 } from './PivotBody.styles';
-import { ColumnGrandTotals, GroupedRowData } from '../../constants';
-import { calculateGrandTotals } from '../../utils/pivotUtils';
+import { ColumnTotals, GroupedRowData } from '../../constants';
+import {
+  calculateGrandTotals,
+  calculateGroupTotals,
+} from '../../utils/pivotUtils';
 
 interface Props {
   pivotRows: GroupedRowData;
@@ -22,23 +25,10 @@ const PivotBody = ({ pivotRows, usStates }: Props): ReactElement => {
   return (
     <tbody>
       {Object.entries(pivotRows).map(([category, subCategories]) => {
-        // Calculate category totals for each state
-        const categoryTotals: { [state: string]: number } = {};
-        let categoryGrandTotal = 0;
-
-        // Initialize totals
-        usStates.forEach(state => {
-          categoryTotals[state] = 0;
-        });
-
-        // Calculate totals
-        Object.values(subCategories).forEach(stateValues => {
-          usStates.forEach(state => {
-            const value = stateValues[state] || 0;
-            categoryTotals[state] += value;
-            categoryGrandTotal += value;
-          });
-        });
+        const { groupTotalsByColumn, groupGrandTotal } = calculateGroupTotals(
+          usStates,
+          subCategories
+        );
 
         return (
           <React.Fragment key={category}>
@@ -79,11 +69,11 @@ const PivotBody = ({ pivotRows, usStates }: Props): ReactElement => {
               <td style={{ ...tdStyle, ...totalRowStyle }}>Total</td>
               {usStates.map(state => (
                 <td key={state} style={{ ...tdStyle, ...totalRowStyle }}>
-                  {categoryTotals[state]?.toLocaleString() || '-'}
+                  {groupTotalsByColumn[state]?.toLocaleString() || '-'}
                 </td>
               ))}
               <td style={{ ...tdStyle, ...totalRowStyle }}>
-                {categoryGrandTotal.toLocaleString()}
+                {groupGrandTotal.toLocaleString()}
               </td>
             </tr>
           </React.Fragment>
