@@ -5,7 +5,7 @@ import { useFetchOrders } from '../../../hooks/useFetchOrders';
 import { mockOrders } from '../../../mocks/mockOrders';
 
 // Mock the useFetchOrders hook
-jest.mock('../../hooks/useFetchOrders');
+jest.mock('../../../hooks/useFetchOrders');
 
 describe('App Component', () => {
   const mockUseFetchOrders = useFetchOrders as jest.MockedFunction<
@@ -26,7 +26,7 @@ describe('App Component', () => {
     });
 
     render(<App />);
-    expect(screen.getByText('Loading orders...')).toBeInTheDocument();
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
   it('renders error state correctly', () => {

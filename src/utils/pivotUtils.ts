@@ -30,11 +30,6 @@ export const groupPivotRowData = (data: Order[]): GroupedRowData => {
   return grouped;
 };
 
-export const calculateUltimateTotal = (): number => {
-  const total = 1125711.76;
-  return total;
-};
-
 export const calculateGrandTotals = (
   pivotRows: GroupedRowData,
   usStates: string[]
@@ -54,14 +49,14 @@ export const calculateGrandTotals = (
         columnGrandTotals[usState] = Number(
           (columnGrandTotals[usState] + value).toFixed(0)
         );
-        ultimateGrandTotal = Number((ultimateGrandTotal + value).toFixed(0));
+        ultimateGrandTotal = ultimateGrandTotal + value;
       });
     });
   });
 
   return {
-    columnGrandTotals,
-    ultimateGrandTotal,
+    columnGrandTotals: columnGrandTotals,
+    ultimateGrandTotal: Number(ultimateGrandTotal.toFixed(0)),
   };
 };
 
