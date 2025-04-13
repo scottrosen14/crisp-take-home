@@ -7,9 +7,9 @@ import {
 import TotalRow from './TotalRow';
 import { useAppSelector } from '../../redux/store';
 import {
-  selectUniqueStates,
   selectGroupTotals,
-} from '../../redux/features/ordersSlice';
+  selectUniqueStates,
+} from '../../redux/features/orders/ordersSelectors';
 
 interface GroupRowProps {
   category: string;

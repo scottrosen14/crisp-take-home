@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import {
-  fetchOrdersThunk,
   selectLoading,
   selectError,
-} from '../../redux/features/ordersSlice';
+} from '../../redux/features/orders/ordersSelectors';
 import PivotTable from '../PivotTable/PivotTable';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { fetchOrdersThunk } from '../../redux/features/orders/fetchOrdersThunk';
 
 function App() {
   const dispatch = useAppDispatch();

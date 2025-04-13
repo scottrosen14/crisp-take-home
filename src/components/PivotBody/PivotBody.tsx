@@ -4,7 +4,7 @@ import {
   selectGrandTotals,
   selectUniqueStates,
   selectPivotRows,
-} from '../../redux/features/ordersSlice';
+} from '../../redux/features/orders/ordersSelectors';
 import GroupedRows from '../GroupedRows/GroupedRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 

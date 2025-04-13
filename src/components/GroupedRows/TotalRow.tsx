@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { tdStyle, totalRowStyle } from '../PivotBody/PivotBody.styles';
 import { useAppSelector } from '../../redux/store';
-import { selectUniqueStates } from '../../redux/features/ordersSlice';
+import { selectUniqueStates } from '../../redux/features/orders/ordersSelectors';
 
 interface Props {
   groupTotalsByColumn: Record<string, number>;

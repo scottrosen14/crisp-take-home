@@ -6,7 +6,7 @@ import {
   columnHeaderStyle,
 } from './PivotHeader.styles';
 import { useAppSelector } from '../../redux/store';
-import { selectUniqueStates } from '../../redux/features/ordersSlice';
+import { selectUniqueStates } from '../../redux/features/orders/ordersSelectors';
 
 const PivotHeader = (): ReactElement => {
   const states = useAppSelector(selectUniqueStates);

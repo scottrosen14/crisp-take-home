@@ -5,7 +5,7 @@ import { useAppSelector } from '../../redux/store';
 import {
   selectUniqueStates,
   selectPivotRows,
-} from '../../redux/features/ordersSlice';
+} from '../../redux/features/orders/ordersSelectors';
 
 const PivotTable = (): ReactElement => {
   const states = useAppSelector(selectUniqueStates);
