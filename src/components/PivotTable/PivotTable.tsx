@@ -1,16 +1,15 @@
-import React, { ReactElement, useMemo } from 'react';
-import { Order } from '../../constants/constants';
+import React, { ReactElement } from 'react';
 import PivotBody from '../PivotBody/PivotBody';
 import PivotHeader from '../PivotHeader/PivotHeader';
-import { getUniqueStates, groupPivotRowData } from '../../utils/pivotUtils';
+import { useAppSelector } from '../../redux/store';
+import {
+  selectUniqueStates,
+  selectPivotRows,
+} from '../../redux/features/ordersSlice';
 
-interface Props {
-  data: Order[];
-}
-
-const PivotTable = ({ data }: Props): ReactElement => {
-  const states = useMemo(() => getUniqueStates(data), [data]);
-  const pivotRows = useMemo(() => groupPivotRowData(data), [data]);
+const PivotTable = (): ReactElement => {
+  const states = useAppSelector(selectUniqueStates);
+  const pivotRows = useAppSelector(selectPivotRows);
 
   return (
     <div
@@ -33,8 +32,8 @@ const PivotTable = ({ data }: Props): ReactElement => {
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
         }}
       >
-        <PivotHeader states={states} />
-        <PivotBody pivotRows={pivotRows} usStates={states} />
+        <PivotHeader />
+        <PivotBody />
       </table>
     </div>
   );

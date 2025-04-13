@@ -5,12 +5,12 @@ import {
   statesHeaderStyle,
   columnHeaderStyle,
 } from './PivotHeader.styles';
+import { useAppSelector } from '../../redux/store';
+import { selectUniqueStates } from '../../redux/features/ordersSlice';
 
-interface Props {
-  states: string[];
-}
+const PivotHeader = (): ReactElement => {
+  const states = useAppSelector(selectUniqueStates);
 
-const PivotHeader = ({ states }: Props): ReactElement => {
   return (
     <thead>
       <tr style={headerRowStyle}>

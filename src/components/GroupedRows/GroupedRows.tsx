@@ -1,21 +1,30 @@
 import React, { ReactElement } from 'react';
-import { categoryStyle, tdStyle, totalRowStyle } from './PivotBody.styles';
+import {
+  categoryStyle,
+  tdStyle,
+  totalRowStyle,
+} from '../PivotBody/PivotBody.styles';
+import TotalRow from './TotalRow';
+import { useAppSelector } from '../../redux/store';
+import {
+  selectUniqueStates,
+  selectGroupTotals,
+} from '../../redux/features/ordersSlice';
 
 interface GroupRowProps {
   category: string;
   subCategories: Record<string, Record<string, number>>;
-  usStates: string[];
-  groupTotalsByColumn: Record<string, number>;
-  groupGrandTotal: number;
 }
 
-const GroupRow = ({
+const GroupedRows = ({
   category,
   subCategories,
-  usStates,
-  groupTotalsByColumn,
-  groupGrandTotal,
 }: GroupRowProps): ReactElement => {
+  const usStates = useAppSelector(selectUniqueStates);
+  const { groupTotalsByColumn, groupGrandTotal } = useAppSelector(state =>
+    selectGroupTotals(state, category, subCategories)
+  );
+
   return (
     <React.Fragment key={category}>
       {Object.entries(subCategories).map(
@@ -51,19 +60,12 @@ const GroupRow = ({
       )}
 
       {/* Category total row */}
-      <tr style={totalRowStyle}>
-        <td style={{ ...tdStyle, ...totalRowStyle }}>Total</td>
-        {usStates.map(state => (
-          <td key={state} style={{ ...tdStyle, ...totalRowStyle }}>
-            {groupTotalsByColumn[state]?.toLocaleString() || '-'}
-          </td>
-        ))}
-        <td style={{ ...tdStyle, ...totalRowStyle }}>
-          {groupGrandTotal.toLocaleString()}
-        </td>
-      </tr>
+      <TotalRow
+        groupTotalsByColumn={groupTotalsByColumn}
+        groupGrandTotal={groupGrandTotal}
+      />
     </React.Fragment>
   );
 };
 
-export default GroupRow;
+export default GroupedRows;

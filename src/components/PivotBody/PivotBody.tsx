@@ -1,47 +1,32 @@
 import React, { ReactElement } from 'react';
-import { GroupedRowData } from '../../constants/constants';
+import { useAppSelector } from '../../redux/store';
 import {
-  calculateGrandTotals,
-  calculateGroupTotals,
-} from '../../utils/pivotUtils';
-import GroupRow from './GroupRow';
-import GrandTotalRow from './GrandTotalRow';
+  selectGrandTotals,
+  selectUniqueStates,
+  selectPivotRows,
+} from '../../redux/features/ordersSlice';
+import GroupedRows from '../GroupedRows/GroupedRows';
+import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 
-interface Props {
-  pivotRows: GroupedRowData;
-  usStates: string[];
-}
-
-const PivotBody = ({ pivotRows, usStates }: Props): ReactElement => {
-  const { columnGrandTotals, ultimateGrandTotal } = calculateGrandTotals(
-    pivotRows,
-    usStates
-  );
+const PivotBody = (): ReactElement => {
+  const usStates = useAppSelector(selectUniqueStates);
+  const pivotRows = useAppSelector(selectPivotRows);
+  const { columnGrandTotals, ultimateGrandTotal } =
+    useAppSelector(selectGrandTotals);
 
   return (
     <tbody>
-      {Object.entries(pivotRows).map(([category, subCategories]) => {
-        const { groupTotalsByColumn, groupGrandTotal } = calculateGroupTotals(
-          usStates,
-          subCategories
-        );
-
-        return (
-          <GroupRow
-            key={category}
-            category={category}
-            subCategories={subCategories}
-            usStates={usStates}
-            groupTotalsByColumn={groupTotalsByColumn}
-            groupGrandTotal={groupGrandTotal}
-          />
-        );
-      })}
+      {Object.entries(pivotRows).map(([category, subCategories]) => (
+        <GroupedRows
+          key={category}
+          category={category}
+          subCategories={subCategories}
+        />
+      ))}
 
       <GrandTotalRow
         columnGrandTotals={columnGrandTotals}
         ultimateGrandTotal={ultimateGrandTotal}
-        usStates={usStates}
       />
     </tbody>
   );

@@ -1,11 +1,16 @@
 import { useEffect } from 'react';
-import { fetchOrdersThunk } from '../../redux/features/ordersSlice';
+import {
+  fetchOrdersThunk,
+  selectLoading,
+  selectError,
+} from '../../redux/features/ordersSlice';
 import PivotTable from '../PivotTable/PivotTable';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { orders, loading, error } = useAppSelector(state => state.orders);
+  const loading = useAppSelector(selectLoading);
+  const error = useAppSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchOrdersThunk());
@@ -20,7 +25,7 @@ function App() {
 
   return (
     <div style={{ padding: '15px', backgroundColor: '#e6e9f0' }}>
-      <PivotTable data={orders} />
+      <PivotTable />
     </div>
   );
 }
