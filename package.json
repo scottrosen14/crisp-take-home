@@ -21,8 +21,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "react-scripts test --watchAll=false && react-scripts build",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test --watchAll=true",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",

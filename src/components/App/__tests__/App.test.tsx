@@ -1,25 +1,30 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
-import { useFetchOrders } from '../../../hooks/useFetchOrders';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import * as reduxHooks from '../../../redux/store';
 import { mockOrders } from '../../../mocks/mockOrders';
 
-// Mock the useFetchOrders hook
-jest.mock('../../../hooks/useFetchOrders');
+// Mock the store hooks
+jest.mock('../../../redux/store', () => ({
+  ...jest.requireActual('../../../redux/store'),
+  useAppDispatch: jest.fn(),
+  useAppSelector: jest.fn(),
+}));
+
+// Mock the thunk dispatch
+const mockDispatch = jest.fn();
 
 describe('App Component', () => {
-  const mockUseFetchOrders = useFetchOrders as jest.MockedFunction<
-    typeof useFetchOrders
-  >;
-
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
+    (reduxHooks.useAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
   });
 
   it('renders loading state correctly', () => {
-    // Mock the hook to return loading state
-    mockUseFetchOrders.mockReturnValue({
+    // Mock the selector to return loading state
+    (reduxHooks.useAppSelector as jest.Mock).mockReturnValue({
       orders: [],
       loading: true,
       error: null,
@@ -31,8 +36,8 @@ describe('App Component', () => {
 
   it('renders error state correctly', () => {
     const errorMessage = 'Failed to fetch orders';
-    // Mock the hook to return error state
-    mockUseFetchOrders.mockReturnValue({
+    // Mock the selector to return error state
+    (reduxHooks.useAppSelector as jest.Mock).mockReturnValue({
       orders: [],
       loading: false,
       error: errorMessage,
@@ -43,8 +48,8 @@ describe('App Component', () => {
   });
 
   it('renders PivotTable when data is loaded successfully', () => {
-    // Mock the hook to return successful data
-    mockUseFetchOrders.mockReturnValue({
+    // Mock the selector to return successful data
+    (reduxHooks.useAppSelector as jest.Mock).mockReturnValue({
       orders: mockOrders,
       loading: false,
       error: null,
