@@ -1,9 +1,9 @@
 import {
-  ColumnTotals,
+  ColumnMetrics,
   Order,
   GroupedRowData,
-  SubGroup,
-  GrandTotals,
+  SubGroups,
+  ColumnGrandTotals,
 } from '../constants/constants';
 
 export const getUniqueStates = (data: Order[]): string[] => {
@@ -33,8 +33,8 @@ export const groupPivotRowData = (data: Order[]): GroupedRowData => {
 export const calculateGrandTotals = (
   pivotRows: GroupedRowData,
   usStates: string[]
-): { columnGrandTotals: GrandTotals; ultimateGrandTotal: number } => {
-  const columnGrandTotals: GrandTotals = {};
+): { columnGrandTotals: ColumnGrandTotals; ultimateGrandTotal: number } => {
+  const columnGrandTotals: ColumnGrandTotals = {};
   let ultimateGrandTotal = 0;
 
   usStates.forEach(usState => {
@@ -62,9 +62,9 @@ export const calculateGrandTotals = (
 
 export const calculateGroupTotals = (
   usStates: string[],
-  subCategories: SubGroup
-): { groupTotalsByColumn: ColumnTotals; groupGrandTotal: number } => {
-  const groupTotalsByColumn: ColumnTotals = {};
+  subCategories: SubGroups
+): { groupTotalsByColumn: ColumnMetrics; groupGrandTotal: number } => {
+  const groupTotalsByColumn: ColumnMetrics = {};
   let groupGrandTotal = 0;
 
   usStates.forEach(state => {

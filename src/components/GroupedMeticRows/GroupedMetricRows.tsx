@@ -10,68 +10,70 @@ import {
   selectGroupTotals,
   selectUniqueStates,
 } from '../../redux/features/orders/ordersSelectors';
+import { SubGroups, ColumnMetrics } from '../../constants/constants';
 
-interface GroupRowProps {
+interface Props {
   groupName: string;
-  subGroup: Record<string, Record<string, number>>;
+  subGroups: SubGroups;
 }
 
-const GroupedRows = ({
-  groupName: group,
-  subGroup,
-}: GroupRowProps): ReactElement => {
+type SubGroupEntry = [string, ColumnMetrics];
+
+const GroupedRows = ({ groupName, subGroups }: Props): ReactElement => {
   const usStates = useAppSelector(selectUniqueStates);
   const { groupTotalsByColumn, groupGrandTotal } = useAppSelector(state =>
-    selectGroupTotals(state, group, subGroup)
+    selectGroupTotals(state, groupName, subGroups)
   );
 
   return (
-    <React.Fragment key={group}>
-      {Object.entries(subGroup).map(([subCategory, stateValues], index) => {
-        console.log(subCategory);
-        const rowTotal = usStates.reduce(
-          (sum, state) => sum + (stateValues[state] || 0),
-          0
-        );
+    <React.Fragment key={groupName}>
+      {Object.entries(subGroups).map(
+        ([subGroupName, columnMetrics]: SubGroupEntry, index) => {
+          const rowTotal = usStates.reduce(
+            (sum: number, columnName: string) =>
+              sum + (columnMetrics[columnName] || 0),
+            0
+          );
 
-        return (
-          <tr
-            key={`${group}-${subCategory}`}
-            data-testid={`${group}-${subCategory}-grouped-row`}
-          >
-            {index === 0 && (
-              <td
-                data-testid={`${group}-${subCategory}-group-label`}
-                style={{ ...tdStyle, ...categoryStyle }}
-                rowSpan={Object.keys(subGroup).length + 1}
-              >
-                {group}
-              </td>
-            )}
-            <td
-              data-testid={`${group}-${subCategory}-subgroup-label`}
-              style={tdStyle}
+          return (
+            <tr
+              key={`${groupName}-${subGroupName}`}
+              data-testid={`${groupName}-${subGroupName}-grouped-row`}
             >
-              {subCategory}
-            </td>
-            {usStates.map(state => (
+              {index === 0 && (
+                <td
+                  data-testid={`${groupName}-${subGroupName}-group-label`}
+                  style={{ ...tdStyle, ...categoryStyle }}
+                  rowSpan={Object.keys(subGroups).length + 1}
+                >
+                  {groupName}
+                </td>
+              )}
               <td
-                data-testid={`${group}-${subCategory}-${state}-value`}
-                key={state}
+                data-testid={`${groupName}-${subGroupName}-subgroup-label`}
                 style={tdStyle}
               >
-                {stateValues[state]?.toLocaleString() || '-'}
+                {subGroupName}
               </td>
-            ))}
-            <td
-              data-testid={`${group}-${subCategory}-row-total`}
-              style={{ ...tdStyle, fontWeight: 500 }}
-            >
-              {rowTotal.toLocaleString()}
-            </td>
-          </tr>
-        );
-      })}
+              {usStates.map(state => (
+                <td
+                  data-testid={`${groupName}-${subGroupName}-${state}-value`}
+                  key={state}
+                  style={tdStyle}
+                >
+                  {columnMetrics[state]?.toLocaleString() || '-'}
+                </td>
+              ))}
+              <td
+                data-testid={`${groupName}-${subGroupName}-row-total`}
+                style={{ ...tdStyle, fontWeight: 500 }}
+              >
+                {rowTotal.toLocaleString()}
+              </td>
+            </tr>
+          );
+        }
+      )}
 
       <TotalRow
         groupTotalsByColumn={groupTotalsByColumn}

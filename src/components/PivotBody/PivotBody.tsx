@@ -7,9 +7,9 @@ import {
 } from '../../redux/features/orders/ordersSelectors';
 import GroupedRows from '../GroupedMeticRows/GroupedMetricRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
-import { GroupedRowData, SubGroup } from '../../constants/constants';
+import { GroupedRowData, SubGroups } from '../../constants/constants';
 
-type GroupedRowEntry = [string, SubGroup];
+type GroupedRowEntry = [string, SubGroups];
 
 const PivotBody = (): ReactElement => {
   const groupedRowData: GroupedRowData = useAppSelector(selectPivotRows);
@@ -19,11 +19,11 @@ const PivotBody = (): ReactElement => {
   return (
     <tbody>
       {Object.entries(groupedRowData).map(
-        ([groupName, subGroup]: GroupedRowEntry) => (
+        ([groupName, subGroups]: GroupedRowEntry) => (
           <GroupedRows
             key={groupName}
             groupName={groupName}
-            subGroup={subGroup}
+            subGroups={subGroups}
           />
         )
       )}

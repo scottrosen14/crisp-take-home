@@ -22,16 +22,16 @@ export interface Order {
   profit: number;
 }
 
-export interface SubGroup {
-  [subGroup: string]: ColumnTotals;
+export interface SubGroups {
+  [subGroup: string]: ColumnMetrics;
 }
 
 export interface GroupedRowData {
-  [group: string]: SubGroup;
+  [group: string]: SubGroups;
 }
 
-export interface ColumnTotals {
+export interface ColumnMetrics {
   [column: string]: number;
 }
 
-export type GrandTotals = ColumnTotals;
+export type ColumnGrandTotals = ColumnMetrics;
