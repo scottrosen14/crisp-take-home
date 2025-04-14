@@ -59,7 +59,6 @@ const GroupedRows = ({
         }
       )}
 
-      {/* Category total row */}
       <TotalRow
         groupTotalsByColumn={groupTotalsByColumn}
         groupGrandTotal={groupGrandTotal}
