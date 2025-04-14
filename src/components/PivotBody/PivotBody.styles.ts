@@ -6,7 +6,7 @@ export const tdStyle: CSSProperties = {
 };
 
 export const categoryStyle: CSSProperties = {
-  fontWeight: 500,
+  fontWeight: 600,
   backgroundColor: '#fafafa',
 };
 

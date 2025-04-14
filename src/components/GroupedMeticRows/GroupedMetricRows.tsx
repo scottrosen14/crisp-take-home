@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import {
-  categoryStyle,
+  categoryStyle as groupStyle,
   tdStyle,
   totalRowStyle,
 } from '../PivotBody/PivotBody.styles';
@@ -43,22 +43,22 @@ const GroupedMetricRows = ({
             >
               {index === 0 && (
                 <td
-                  data-testid={`${groupName}-${subGroupName}-group-label`}
-                  style={{ ...tdStyle, ...categoryStyle }}
+                  data-testid={`${groupName}-${subGroupName}-group-name`}
+                  style={{ ...tdStyle, ...groupStyle }}
                   rowSpan={Object.keys(subGroups).length + 1}
                 >
                   {groupName}
                 </td>
               )}
               <td
-                data-testid={`${groupName}-${subGroupName}-subgroup-label`}
+                data-testid={`${groupName}-${subGroupName}-subgroup-name`}
                 style={tdStyle}
               >
                 {subGroupName}
               </td>
               {columns.map(state => (
                 <td
-                  data-testid={`${groupName}-${subGroupName}-${state}-value`}
+                  data-testid={`${groupName}-${subGroupName}-${state}-metric`}
                   key={state}
                   style={tdStyle}
                 >
