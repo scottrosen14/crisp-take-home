@@ -5,7 +5,7 @@ import {
   selectUniqueStates,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
-import GroupedRows from '../GroupedRows/GroupedRows';
+import GroupedRows from '../GroupedMeticRows/GroupedMetricRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 
 const PivotBody = (): ReactElement => {

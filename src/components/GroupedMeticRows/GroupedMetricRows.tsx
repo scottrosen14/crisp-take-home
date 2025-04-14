@@ -36,22 +36,38 @@ const GroupedRows = ({
           );
 
           return (
-            <tr key={`${category}-${subCategory}`}>
+            <tr
+              key={`${category}-${subCategory}`}
+              data-testid={`${category}-${subCategory}-grouped-row`}
+            >
               {index === 0 && (
                 <td
+                  data-testid={`${category}-${subCategory}-group-label`}
                   style={{ ...tdStyle, ...categoryStyle }}
-                  rowSpan={Object.keys(subCategories).length + 1} // +1 for the total row
+                  rowSpan={Object.keys(subCategories).length + 1}
                 >
                   {category}
                 </td>
               )}
-              <td style={tdStyle}>{subCategory}</td>
+              <td
+                data-testid={`${category}-${subCategory}-subgroup-label`}
+                style={tdStyle}
+              >
+                {subCategory}
+              </td>
               {usStates.map(state => (
-                <td key={state} style={tdStyle}>
+                <td
+                  data-testid={`${category}-${subCategory}-${state}-value`}
+                  key={state}
+                  style={tdStyle}
+                >
                   {stateValues[state]?.toLocaleString() || '-'}
                 </td>
               ))}
-              <td style={{ ...tdStyle, fontWeight: 500 }}>
+              <td
+                data-testid={`${category}-${subCategory}-row-total`}
+                style={{ ...tdStyle, fontWeight: 500 }}
+              >
                 {rowTotal.toLocaleString()}
               </td>
             </tr>
