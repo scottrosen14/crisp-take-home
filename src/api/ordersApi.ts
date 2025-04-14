@@ -1,5 +1,6 @@
 import { Order } from '../constants/constants';
 
+// TODO: create response types
 export const fetchOrders = async (): Promise<Order[]> => {
   const res = await fetch('/sales-orders.json');
   if (!res.ok) {

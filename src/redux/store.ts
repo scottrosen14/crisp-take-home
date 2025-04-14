@@ -7,7 +7,6 @@ export const store = configureStore({
     ordersReducer,
   },
 });
-console.log(store.getState());
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

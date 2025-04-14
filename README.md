@@ -1,46 +1,109 @@
-# Getting Started with Create React App
+# Pivot Table Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based application that displays and analyzes data using a pivot table interface. Built with TypeScript, Redux Toolkit, and modern React practices.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Interactive pivot table visualization
+- Real-time data updates
+- Error handling and loading states
+- Responsive design
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js (v18 or higher)
+- Yarn package manager
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Fork this repository to your GitHub account
+2. Clone your forked repository:
+```bash
+git clone https://github.com/YOUR_USERNAME/crisp-take-home.git
+cd crisp-take-home
+```
 
-### `npm run build`
+3. Install dependencies:
+```bash
+yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Git Hooks Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project uses Husky for git hooks to ensure code quality. After installation, you need to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Install Husky git hooks:
+```bash
+yarn prepare
+```
 
-### `npm run eject`
+This will set up pre-commit hooks that run:
+- ESLint checks
+- Prettier formatting
+- TypeScript type checking
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Available Scripts
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `yarn start` - Runs the app in development mode
+- `yarn build` - Builds the app for production
+- `yarn test` - Runs the test suite
+- `yarn test:watch` - Runs tests in watch mode
+- `yarn format` - Formats code using Prettier
+- `yarn lint` - Runs ESLint
+- `yarn lint:fix` - Fixes ESLint issues
+- `yarn lint:format` - Formats and fixes linting issues
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+src/
+├── api/           # API calls and endpoints
+├── components/    # React components
+├── constants/     # Application constants and types
+├── mocks/         # Mock data for testing and development
+├── redux/         # Redux store, actions, and reducers
+├── utils/         # Utility functions and helpers
+├── index.tsx      # Application entry point
+├── index.css      # Global styles
+├── setupTests.ts  # Jest test setup
+```
 
-## Learn More
+## Development
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project uses:
+- React 19
+- TypeScript
+- Redux Toolkit
+- ESLint and Prettier for code quality
+- Husky for git hooks
+- Jest for testing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Code Quality
+
+The project includes:
+- ESLint configuration for code linting
+- Prettier for code formatting
+- Husky pre-commit hooks
+- TypeScript for type safety
+
+## Testing
+
+Run the test suite:
+```bash
+yarn test
+```
+
+For watch mode:
+```bash
+yarn test:watch
+```
+
+## Contributing
+
+1. Create a new branch for your feature
+2. Make your changes
+3. Run tests and ensure they pass
+4. Submit a pull request
+
