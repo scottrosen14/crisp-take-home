@@ -4,7 +4,7 @@ import {
   tdStyle,
   totalRowStyle,
 } from '../PivotBody/PivotBody.styles';
-import TotalRow from './TotalRow';
+import GroupTotalRow from './GroupTotalRow';
 import { useAppSelector } from '../../redux/store';
 import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
 import { SubGroups, ColumnMetrics } from '../../constants/constants';
@@ -56,13 +56,13 @@ const GroupedMetricRows = ({
               >
                 {subGroupName}
               </td>
-              {columns.map(state => (
+              {columns.map(columnName => (
                 <td
-                  data-testid={`${groupName}-${subGroupName}-${state}-metric`}
-                  key={state}
+                  data-testid={`${groupName}-${subGroupName}-${columnName}-metric`}
+                  key={columnName}
                   style={tdStyle}
                 >
-                  {columnMetrics[state]?.toLocaleString() || '-'}
+                  {columnMetrics[columnName]?.toLocaleString() || '-'}
                 </td>
               ))}
               <td
@@ -76,7 +76,7 @@ const GroupedMetricRows = ({
         }
       )}
 
-      <TotalRow
+      <GroupTotalRow
         groupTotalsByColumn={groupTotalsByColumn}
         groupGrandTotal={groupGrandTotal}
         columns={columns}

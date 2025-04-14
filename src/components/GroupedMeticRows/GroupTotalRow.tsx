@@ -7,30 +7,30 @@ interface Props {
   columns: string[];
 }
 
-const TotalRow = ({
+const GroupTotalRow = ({
   groupTotalsByColumn,
   groupGrandTotal,
   columns,
 }: Props): ReactElement => {
   return (
-    <tr data-testid="total-row" style={totalRowStyle}>
-      <td data-testid="total-row-label" style={tdStyle}>
+    <tr data-testid="group-total-row" style={totalRowStyle}>
+      <td data-testid="group-total-row-label" style={tdStyle}>
         Total
       </td>
       {columns.map(columnName => (
         <td
-          data-testid={`total-row-${columnName}`}
+          data-testid={`group-total-row-${columnName}-value`}
           key={columnName}
           style={tdStyle}
         >
           {groupTotalsByColumn[columnName]?.toLocaleString() || '-'}
         </td>
       ))}
-      <td data-testid="total-row-ultimate-total" style={tdStyle}>
+      <td data-testid="group-total-row-end-total" style={tdStyle}>
         {groupGrandTotal.toLocaleString()}
       </td>
     </tr>
   );
 };
 
-export default TotalRow;
+export default GroupTotalRow;
