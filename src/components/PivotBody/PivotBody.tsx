@@ -7,22 +7,26 @@ import {
 } from '../../redux/features/orders/ordersSelectors';
 import GroupedRows from '../GroupedMeticRows/GroupedMetricRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
+import { GroupedRowData, SubGroup } from '../../constants/constants';
+
+type GroupedRowEntry = [string, SubGroup];
 
 const PivotBody = (): ReactElement => {
-  const usStates = useAppSelector(selectUniqueStates);
-  const pivotRows = useAppSelector(selectPivotRows);
+  const groupedRowData: GroupedRowData = useAppSelector(selectPivotRows);
   const { columnGrandTotals, ultimateGrandTotal } =
     useAppSelector(selectGrandTotals);
 
   return (
     <tbody>
-      {Object.entries(pivotRows).map(([category, subCategories]) => (
-        <GroupedRows
-          key={category}
-          category={category}
-          subCategories={subCategories}
-        />
-      ))}
+      {Object.entries(groupedRowData).map(
+        ([groupName, subGroup]: GroupedRowEntry) => (
+          <GroupedRows
+            key={groupName}
+            groupName={groupName}
+            subGroup={subGroup}
+          />
+        )
+      )}
 
       <GrandTotalRow
         columnGrandTotals={columnGrandTotals}
