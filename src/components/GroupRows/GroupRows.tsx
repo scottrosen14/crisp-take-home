@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 import {
   categoryStyle as groupStyle,
   tdStyle,
@@ -9,13 +9,13 @@ import { useAppSelector } from '../../redux/store';
 import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
 import { SubGroups, ColumnMetrics } from '../../constants/constants';
 
+type SubGroupEntry = [string, ColumnMetrics];
+
 interface Props {
   groupName: string;
   subGroups: SubGroups;
   columns: string[];
 }
-
-type SubGroupEntry = [string, ColumnMetrics];
 
 const GroupedMetricRows = ({
   groupName,
@@ -27,7 +27,7 @@ const GroupedMetricRows = ({
   );
 
   return (
-    <React.Fragment key={groupName}>
+    <Fragment data-testid={`${groupName}-group-rows`} key={groupName}>
       {Object.entries(subGroups).map(
         ([subGroupName, columnMetrics]: SubGroupEntry, index) => {
           const rowTotal = columns.reduce(
@@ -81,7 +81,7 @@ const GroupedMetricRows = ({
         groupGrandTotal={groupGrandTotal}
         columns={columns}
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

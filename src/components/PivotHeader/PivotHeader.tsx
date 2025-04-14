@@ -32,11 +32,11 @@ const PivotHeader = (): ReactElement => {
           style={productsHeaderStyle}
         ></th>
       </tr>
-      <tr>
-        <th data-testid="group-header" style={columnHeaderStyle}>
+      <tr data-testid="sub-header-row">
+        <th data-testid="group-header-title" style={columnHeaderStyle}>
           Category
         </th>
-        <th data-testid="sub-group-header" style={columnHeaderStyle}>
+        <th data-testid="sub-group-header-title" style={columnHeaderStyle}>
           Sub-Category
         </th>
         {columns.map(columnName => (

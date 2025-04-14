@@ -5,7 +5,7 @@ import {
   selectUniqueStates,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
-import GroupedMetricRows from '../GroupedMeticRows/GroupedMetricRows';
+import GroupedMetricRows from '../GroupRows/GroupRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 import { GroupedRowData, SubGroups } from '../../constants/constants';
 
