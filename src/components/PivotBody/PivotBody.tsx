@@ -5,13 +5,14 @@ import {
   selectUniqueStates,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
-import GroupedRows from '../GroupedMeticRows/GroupedMetricRows';
+import GroupedMetricRows from '../GroupedMeticRows/GroupedMetricRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 import { GroupedRowData, SubGroups } from '../../constants/constants';
 
 type GroupedRowEntry = [string, SubGroups];
 
 const PivotBody = (): ReactElement => {
+  const columns: string[] = useAppSelector(selectUniqueStates);
   const groupedRowData: GroupedRowData = useAppSelector(selectPivotRows);
   const { columnGrandTotals, ultimateGrandTotal } =
     useAppSelector(selectGrandTotals);
@@ -20,10 +21,11 @@ const PivotBody = (): ReactElement => {
     <tbody>
       {Object.entries(groupedRowData).map(
         ([groupName, subGroups]: GroupedRowEntry) => (
-          <GroupedRows
+          <GroupedMetricRows
             key={groupName}
             groupName={groupName}
             subGroups={subGroups}
+            columns={columns}
           />
         )
       )}

@@ -6,21 +6,22 @@ import {
 } from '../PivotBody/PivotBody.styles';
 import TotalRow from './TotalRow';
 import { useAppSelector } from '../../redux/store';
-import {
-  selectGroupTotals,
-  selectUniqueStates,
-} from '../../redux/features/orders/ordersSelectors';
+import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
 import { SubGroups, ColumnMetrics } from '../../constants/constants';
 
 interface Props {
   groupName: string;
   subGroups: SubGroups;
+  columns: string[];
 }
 
 type SubGroupEntry = [string, ColumnMetrics];
 
-const GroupedRows = ({ groupName, subGroups }: Props): ReactElement => {
-  const usStates = useAppSelector(selectUniqueStates);
+const GroupedMetricRows = ({
+  groupName,
+  subGroups,
+  columns,
+}: Props): ReactElement => {
   const { groupTotalsByColumn, groupGrandTotal } = useAppSelector(state =>
     selectGroupTotals(state, groupName, subGroups)
   );
@@ -29,7 +30,7 @@ const GroupedRows = ({ groupName, subGroups }: Props): ReactElement => {
     <React.Fragment key={groupName}>
       {Object.entries(subGroups).map(
         ([subGroupName, columnMetrics]: SubGroupEntry, index) => {
-          const rowTotal = usStates.reduce(
+          const rowTotal = columns.reduce(
             (sum: number, columnName: string) =>
               sum + (columnMetrics[columnName] || 0),
             0
@@ -55,7 +56,7 @@ const GroupedRows = ({ groupName, subGroups }: Props): ReactElement => {
               >
                 {subGroupName}
               </td>
-              {usStates.map(state => (
+              {columns.map(state => (
                 <td
                   data-testid={`${groupName}-${subGroupName}-${state}-value`}
                   key={state}
@@ -78,9 +79,10 @@ const GroupedRows = ({ groupName, subGroups }: Props): ReactElement => {
       <TotalRow
         groupTotalsByColumn={groupTotalsByColumn}
         groupGrandTotal={groupGrandTotal}
+        columns={columns}
       />
     </React.Fragment>
   );
 };
 
-export default GroupedRows;
+export default GroupedMetricRows;
