@@ -5,7 +5,7 @@ import {
   selectUniqueStates,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
-import GroupedMetricRows from '../GroupRows/GroupRows';
+import GroupRows from '../GroupRows/GroupRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
 import { GroupedRowData, SubGroups } from '../../constants/constants';
 
@@ -21,7 +21,7 @@ const PivotBody = (): ReactElement => {
     <tbody>
       {Object.entries(groupedRowData).map(
         ([groupName, subGroups]: GroupedRowEntry) => (
-          <GroupedMetricRows
+          <GroupRows
             key={groupName}
             groupName={groupName}
             subGroups={subGroups}

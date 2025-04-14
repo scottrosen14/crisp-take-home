@@ -4,7 +4,7 @@ import {
   tdStyle,
   totalRowStyle,
 } from '../PivotBody/PivotBody.styles';
-import GroupTotalRow from './GroupTotalRow';
+import GroupTotalRow from './GroupTotalRow/GroupTotalRow';
 import { useAppSelector } from '../../redux/store';
 import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
 import { SubGroups, ColumnMetrics } from '../../constants/constants';
@@ -17,11 +17,7 @@ interface Props {
   columns: string[];
 }
 
-const GroupedMetricRows = ({
-  groupName,
-  subGroups,
-  columns,
-}: Props): ReactElement => {
+const GroupRows = ({ groupName, subGroups, columns }: Props): ReactElement => {
   const { groupTotalsByColumn, groupGrandTotal } = useAppSelector(state =>
     selectGroupTotals(state, groupName, subGroups)
   );
@@ -85,4 +81,4 @@ const GroupedMetricRows = ({
   );
 };
 
-export default GroupedMetricRows;
+export default GroupRows;

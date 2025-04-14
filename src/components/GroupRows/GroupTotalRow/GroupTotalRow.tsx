@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { tdStyle, totalRowStyle } from '../PivotBody/PivotBody.styles';
+import { tdStyle, totalRowStyle } from '../../PivotBody/PivotBody.styles';
 
 interface Props {
   groupTotalsByColumn: Record<string, number>;
