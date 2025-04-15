@@ -11,10 +11,11 @@ export const getUniqueStates = (data: Order[]): string[] => {
   return Array.from(stateSet).sort();
 };
 
-export const groupPivotRowData = (data: Order[]): GroupedRowData => {
+export const groupPivotRowData = (orders: Order[]): GroupedRowData => {
   const grouped: GroupedRowData = {};
 
-  data.forEach(({ category, subCategory, state, sales }) => {
+  // TODO: these name will need to come from the pivot config state
+  orders.forEach(({ category, subCategory, state, sales }) => {
     if (!grouped[category]) {
       grouped[category] = {};
     }
@@ -24,7 +25,9 @@ export const groupPivotRowData = (data: Order[]): GroupedRowData => {
     if (!grouped[category][subCategory][state]) {
       grouped[category][subCategory][state] = 0;
     }
-    grouped[category][subCategory][state] += sales;
+    // Round at each addition to prevent floating-point precision errors
+    grouped[category][subCategory][state] =
+      Math.round((grouped[category][subCategory][state] + sales) * 100) / 100;
   });
 
   return grouped;
@@ -46,17 +49,17 @@ export const calculateGrandTotals = (
     Object.values(group).forEach((columnValues: ColumnValues) => {
       columns.forEach(columnName => {
         const value = columnValues[columnName] || 0;
-        columnGrandTotals[columnName] = Number(
-          (columnGrandTotals[columnName] + value).toFixed(0)
+        columnGrandTotals[columnName] = Math.round(
+          columnGrandTotals[columnName] + value
         );
-        ultimateGrandTotal = ultimateGrandTotal + value;
+        ultimateGrandTotal = Math.round(ultimateGrandTotal + value);
       });
     });
   });
 
   return {
     columnGrandTotals: columnGrandTotals,
-    ultimateGrandTotal: Number(ultimateGrandTotal.toFixed(0)),
+    ultimateGrandTotal: Math.round(ultimateGrandTotal),
   };
 };
 
@@ -74,7 +77,9 @@ export const calculateGroupTotals = (
   Object.values(subGroups).forEach((columnValues: ColumnValues) => {
     columns.forEach((columnName: string) => {
       const value = columnValues[columnName] || 0;
-      groupTotalsByColumn[columnName] += value;
+      groupTotalsByColumn[columnName] = Math.round(
+        groupTotalsByColumn[columnName] + value
+      );
       groupGrandTotal += value;
     });
   });
