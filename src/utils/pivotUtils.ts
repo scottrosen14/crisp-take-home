@@ -2,7 +2,7 @@ import {
   ColumnMetrics,
   Order,
   GroupedRowData,
-  SubGroups,
+  Group,
   ColumnGrandTotals,
 } from '../constants/constants';
 
@@ -31,23 +31,23 @@ export const groupPivotRowData = (data: Order[]): GroupedRowData => {
 };
 
 export const calculateGrandTotals = (
-  pivotRows: GroupedRowData,
-  usStates: string[]
+  groupedRows: GroupedRowData,
+  columns: string[]
 ): { columnGrandTotals: ColumnGrandTotals; ultimateGrandTotal: number } => {
   const columnGrandTotals: ColumnGrandTotals = {};
   let ultimateGrandTotal = 0;
 
-  usStates.forEach(usState => {
-    columnGrandTotals[usState] = 0;
+  columns.forEach((columnName: string) => {
+    columnGrandTotals[columnName] = 0;
   });
 
   // TODO: Optimize this; Cannot have triple nested loops
-  Object.values(pivotRows).forEach(subCategories => {
-    Object.values(subCategories).forEach(stateValues => {
-      usStates.forEach(usState => {
-        const value = stateValues[usState] || 0;
-        columnGrandTotals[usState] = Number(
-          (columnGrandTotals[usState] + value).toFixed(0)
+  Object.values(groupedRows).forEach((group: Group) => {
+    Object.values(group).forEach((columnValues: ColumnMetrics) => {
+      columns.forEach(columnName => {
+        const value = columnValues[columnName] || 0;
+        columnGrandTotals[columnName] = Number(
+          (columnGrandTotals[columnName] + value).toFixed(0)
         );
         ultimateGrandTotal = ultimateGrandTotal + value;
       });
@@ -61,18 +61,18 @@ export const calculateGrandTotals = (
 };
 
 export const calculateGroupTotals = (
-  usStates: string[],
-  subCategories: SubGroups
+  columns: string[],
+  subGroups: Group
 ): { groupTotalsByColumn: ColumnMetrics; groupGrandTotal: number } => {
   const groupTotalsByColumn: ColumnMetrics = {};
   let groupGrandTotal = 0;
 
-  usStates.forEach(state => {
+  columns.forEach(state => {
     groupTotalsByColumn[state] = 0;
   });
 
-  Object.values(subCategories).forEach(stateValues => {
-    usStates.forEach(state => {
+  Object.values(subGroups).forEach(stateValues => {
+    columns.forEach(state => {
       const value = stateValues[state] || 0;
       groupTotalsByColumn[state] += value;
       groupGrandTotal += value;

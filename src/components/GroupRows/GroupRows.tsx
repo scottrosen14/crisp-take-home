@@ -8,11 +8,11 @@ import GroupTotalRow from './GroupTotalRow/GroupTotalRow';
 import GroupMetricRows from './GroupMetricRows/GroupMetricRows';
 import { useAppSelector } from '../../redux/store';
 import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
-import { SubGroups, ColumnMetrics } from '../../constants/constants';
+import { Group, ColumnMetrics } from '../../constants/constants';
 
 interface Props {
   groupName: string;
-  subGroups: SubGroups;
+  subGroups: Group;
   columns: string[];
 }
 

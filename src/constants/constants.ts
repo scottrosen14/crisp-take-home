@@ -22,12 +22,12 @@ export interface Order {
   profit: number;
 }
 
-export interface SubGroups {
+export interface Group {
   [subGroup: string]: ColumnMetrics;
 }
 
 export interface GroupedRowData {
-  [group: string]: SubGroups;
+  [group: string]: Group;
 }
 
 export interface ColumnMetrics {

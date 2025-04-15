@@ -7,9 +7,9 @@ import {
 } from '../../redux/features/orders/ordersSelectors';
 import GroupRows from '../GroupRows/GroupRows';
 import GrandTotalRow from '../GrandTotalRow/GrandTotalRow';
-import { GroupedRowData, SubGroups } from '../../constants/constants';
+import { GroupedRowData, Group } from '../../constants/constants';
 
-type GroupedRowEntry = [string, SubGroups];
+type GroupedRowEntry = [string, Group];
 
 const PivotBody = (): ReactElement => {
   const columns: string[] = useAppSelector(selectUniqueStates);
