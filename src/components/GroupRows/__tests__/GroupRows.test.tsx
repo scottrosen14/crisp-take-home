@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import PivotBody from '../PivotBody';
+import GroupRows from '../GroupRows';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import * as reduxHooks from '../../../redux/store';
@@ -10,15 +10,19 @@ jest.mock('../../../redux/store', () => ({
   useAppSelector: jest.fn(),
 }));
 
-describe('PivotBody Component', () => {
+describe('GroupRows Component', () => {
+  const mockProps = {
+    groupName: 'Furniture',
+    subGroups: {},
+    columns: ['California', 'Florida'],
+  };
+
   const store = configureStore({
     reducer: {
       orders: () => ({
-        uniqueColumns: ['California', 'Florida'],
-        pivotRows: { Furniture: {} },
-        grandTotals: {
-          columnGrandTotals: {},
-          ultimateGrandTotal: 0,
+        groupTotals: {
+          groupedTotalsByColumn: {},
+          groupGrandTotal: 0,
         },
       }),
     },
@@ -27,28 +31,26 @@ describe('PivotBody Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (reduxHooks.useAppSelector as jest.Mock).mockReturnValue({
-      columns: ['California', 'Florida'],
-      groupedRowData: { Furniture: {} },
-      columnGrandTotals: {},
-      ultimateGrandTotal: 0,
+      groupedTotalsByColumn: {},
+      groupGrandTotal: 0,
     });
   });
 
-  it('renders GroupRows component', () => {
+  it('renders GroupMetricRows component', () => {
     render(
       <Provider store={store}>
-        <PivotBody />
+        <GroupRows {...mockProps} />
       </Provider>
     );
-    expect(screen.getByTestId('group-rows')).toBeInTheDocument();
+    expect(screen.getByTestId('group-metric-rows')).toBeInTheDocument();
   });
 
-  it('renders GrandTotalRow component', () => {
+  it('renders GroupTotalRow component', () => {
     render(
       <Provider store={store}>
-        <PivotBody />
+        <GroupRows {...mockProps} />
       </Provider>
     );
-    expect(screen.getByTestId('grand-total-row')).toBeInTheDocument();
+    expect(screen.getByTestId('group-total-row')).toBeInTheDocument();
   });
 });
