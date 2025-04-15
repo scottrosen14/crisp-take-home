@@ -1,6 +1,6 @@
 import { RootState } from '../../store';
 import {
-  getUniqueStates,
+  getUniqueColumns,
   groupPivotRowData,
   calculateGroupTotals,
   calculateGrandTotals,
@@ -10,22 +10,21 @@ export const selectOrders = (state: RootState) => state.ordersReducer.orders;
 export const selectLoading = (state: RootState) => state.ordersReducer.loading;
 export const selectError = (state: RootState) => state.ordersReducer.error;
 
-export const selectUniqueStates = (state: RootState) =>
-  getUniqueStates(state.ordersReducer.orders);
+export const selectUniqueColumns = (state: RootState) =>
+  getUniqueColumns(state.ordersReducer.orders);
 export const selectPivotRows = (state: RootState) =>
   groupPivotRowData(state.ordersReducer.orders);
 
 export const selectGroupTotals = (
-  state: RootState,
-  category: string,
-  subCategories: Record<string, Record<string, number>>
+  rootState: RootState,
+  subGroups: Record<string, Record<string, number>>
 ) => {
-  const states = selectUniqueStates(state);
-  return calculateGroupTotals(states, subCategories);
+  const columns = selectUniqueColumns(rootState);
+  return calculateGroupTotals(columns, subGroups);
 };
 
-export const selectGrandTotals = (state: RootState) => {
-  const pivotRows = selectPivotRows(state);
-  const states = selectUniqueStates(state);
-  return calculateGrandTotals(pivotRows, states);
+export const selectGrandTotals = (columnName: RootState) => {
+  const pivotRows = selectPivotRows(columnName);
+  const columns = selectUniqueColumns(columnName);
+  return calculateGrandTotals(pivotRows, columns);
 };

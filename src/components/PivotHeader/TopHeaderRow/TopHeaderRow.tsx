@@ -5,10 +5,10 @@ import {
   statesHeaderStyle,
 } from '../PivotHeader.styles';
 import { useAppSelector } from '../../../redux/store';
-import { selectUniqueStates } from '../../../redux/features/orders/ordersSelectors';
+import { selectUniqueColumns } from '../../../redux/features/orders/ordersSelectors';
 
 const TopHeaderRow = (): ReactElement => {
-  const columns: string[] = useAppSelector(selectUniqueStates);
+  const columns: string[] = useAppSelector(selectUniqueColumns);
 
   return (
     <tr data-testid="top-header-row" style={headerRowStyle}>

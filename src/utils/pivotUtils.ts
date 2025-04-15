@@ -6,7 +6,7 @@ import {
   ColumnGrandTotals,
 } from '../constants/constants';
 
-export const getUniqueStates = (data: Order[]): string[] => {
+export const getUniqueColumns = (data: Order[]): string[] => {
   const stateSet = new Set(data.map(d => d.state));
   return Array.from(stateSet).sort();
 };
@@ -44,7 +44,6 @@ export const calculateGrandTotals = (
     columnGrandTotals[columnName] = 0;
   });
 
-  // TODO: Optimize this; Cannot have triple nested loops
   Object.values(groupedRows).forEach((group: Group) => {
     Object.values(group).forEach((columnValues: ColumnValues) => {
       columns.forEach(columnName => {

@@ -3,7 +3,7 @@ import PivotBody from '../PivotBody/PivotBody';
 import PivotHeader from '../PivotHeader/PivotHeader';
 import { useAppSelector } from '../../redux/store';
 import {
-  selectUniqueStates,
+  selectUniqueColumns,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
 import { containerStyles, tableStyles } from './PivotTable.styles';

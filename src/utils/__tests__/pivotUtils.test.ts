@@ -1,6 +1,6 @@
 import {
   calculateGrandTotals,
-  getUniqueStates,
+  getUniqueColumns,
   groupPivotRowData,
 } from '../pivotUtils';
 import { mockOrders } from '../../mocks/mockOrders';
@@ -8,12 +8,12 @@ import { mockOrders } from '../../mocks/mockOrders';
 describe('pivotUtils', () => {
   describe('getUniqueStates', () => {
     it('should handle empty data', () => {
-      const result = getUniqueStates([]);
+      const result = getUniqueColumns([]);
       expect(result).toEqual([]);
     });
 
     it('should return unique states sorted alphabetically', () => {
-      const result = getUniqueStates(mockOrders);
+      const result = getUniqueColumns(mockOrders);
       expect(result).toEqual(['California', 'Florida', 'Kentucky']);
     });
   });

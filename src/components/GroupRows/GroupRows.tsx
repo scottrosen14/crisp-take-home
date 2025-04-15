@@ -18,7 +18,7 @@ interface Props {
 
 const GroupRows = ({ groupName, subGroups, columns }: Props): ReactElement => {
   const { groupedTotalsByColumn: groupTotalsByColumn, groupGrandTotal } =
-    useAppSelector(state => selectGroupTotals(state, groupName, subGroups));
+    useAppSelector(state => selectGroupTotals(state, subGroups));
 
   return (
     <Fragment key={`${groupName}-group-rows`}>

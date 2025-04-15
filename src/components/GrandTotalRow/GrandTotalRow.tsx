@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { grandTotalRowStyle, tdStyle } from '../PivotBody/PivotBody.styles';
 import { useAppSelector } from '../../redux/store';
-import { selectUniqueStates } from '../../redux/features/orders/ordersSelectors';
+import { selectUniqueColumns } from '../../redux/features/orders/ordersSelectors';
 
 interface GrandTotalRowProps {
   columnGrandTotals: Record<string, number>;
@@ -13,7 +13,7 @@ const GrandTotalRow = ({
   columnGrandTotals,
   ultimateGrandTotal,
 }: GrandTotalRowProps): ReactElement => {
-  const usStates = useAppSelector(selectUniqueStates);
+  const usStates = useAppSelector(selectUniqueColumns);
 
   return (
     <tr style={grandTotalRowStyle}>

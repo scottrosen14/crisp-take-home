@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { useAppSelector } from '../../redux/store';
 import {
   selectGrandTotals,
-  selectUniqueStates,
+  selectUniqueColumns,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
 import GroupRows from '../GroupRows/GroupRows';
@@ -12,7 +12,7 @@ import { GroupedRowData, Group } from '../../constants/constants';
 type GroupedRowEntry = [string, Group];
 
 const PivotBody = (): ReactElement => {
-  const columns: string[] = useAppSelector(selectUniqueStates);
+  const columns: string[] = useAppSelector(selectUniqueColumns);
   const groupedRowData: GroupedRowData = useAppSelector(selectPivotRows);
   const { columnGrandTotals, ultimateGrandTotal } =
     useAppSelector(selectGrandTotals);

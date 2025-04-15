@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import { columnHeaderStyle } from '../PivotHeader.styles';
 import { useAppSelector } from '../../../redux/store';
-import { selectUniqueStates } from '../../../redux/features/orders/ordersSelectors';
+import { selectUniqueColumns } from '../../../redux/features/orders/ordersSelectors';
 
 const SubHeaderRow = (): ReactElement => {
-  const columns: string[] = useAppSelector(selectUniqueStates);
+  const columns: string[] = useAppSelector(selectUniqueColumns);
 
   return (
     <tr data-testid="sub-header-row">
