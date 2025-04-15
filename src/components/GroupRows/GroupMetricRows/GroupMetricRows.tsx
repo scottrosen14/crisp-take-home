@@ -21,10 +21,10 @@ const GroupMetricRows = ({
   return (
     <>
       {Object.entries(subGroups).map(
-        ([subGroupName, columnMetrics]: SubGroupEntry, index) => {
+        ([subGroupName, columnValues]: SubGroupEntry, index) => {
           const rowTotal = columns.reduce(
             (sum: number, columnName: string) =>
-              sum + (columnMetrics[columnName] || 0),
+              sum + (columnValues[columnName] || 0),
             0
           );
 
@@ -48,15 +48,21 @@ const GroupMetricRows = ({
               >
                 {subGroupName}
               </td>
-              {columns.map(columnName => (
-                <td
-                  data-testid={`${groupName}-${subGroupName}-${columnName}-metric`}
-                  key={columnName}
-                  style={tdStyle}
-                >
-                  {columnMetrics[columnName]?.toLocaleString() || '-'}
-                </td>
-              ))}
+              {columns.map(columnName => {
+                return (
+                  <td
+                    data-testid={`${groupName}-${subGroupName}-${columnName}-metric`}
+                    key={columnName}
+                    style={tdStyle}
+                  >
+                    {columnValues[columnName] === undefined
+                      ? '-'
+                      : Math.round(
+                          columnValues[columnName]
+                        )?.toLocaleString() || '-'}
+                  </td>
+                );
+              })}
               <td
                 data-testid={`${groupName}-${subGroupName}-row-total`}
                 style={{ ...tdStyle, fontWeight: 500 }}

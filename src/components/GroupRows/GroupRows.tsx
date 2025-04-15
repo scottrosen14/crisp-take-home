@@ -21,7 +21,7 @@ const GroupRows = ({ groupName, subGroups, columns }: Props): ReactElement => {
     useAppSelector(state => selectGroupTotals(state, groupName, subGroups));
 
   return (
-    <Fragment data-testid={`${groupName}-group-rows`} key={groupName}>
+    <Fragment key={`${groupName}-group-rows`}>
       <GroupMetricRows
         groupName={groupName}
         subGroups={subGroups}
