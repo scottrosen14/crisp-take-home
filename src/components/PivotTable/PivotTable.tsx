@@ -6,32 +6,12 @@ import {
   selectUniqueStates,
   selectPivotRows,
 } from '../../redux/features/orders/ordersSelectors';
+import { containerStyles, tableStyles } from './PivotTable.styles';
 
 const PivotTable = (): ReactElement => {
-  const states = useAppSelector(selectUniqueStates);
-  const pivotRows = useAppSelector(selectPivotRows);
-
   return (
-    <div
-      style={{
-        padding: '5px',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        width: '100%',
-        overflowX: 'auto',
-      }}
-    >
-      <table
-        style={{
-          borderCollapse: 'collapse',
-          width: '100%',
-          fontFamily: 'Arial, sans-serif',
-          padding: '8px',
-          border: '1px solid #ddd',
-          backgroundColor: '#ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-        }}
-      >
+    <div style={containerStyles}>
+      <table style={tableStyles}>
         <PivotHeader />
         <PivotBody />
       </table>

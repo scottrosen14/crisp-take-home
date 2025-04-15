@@ -33,7 +33,7 @@ const pivotConfigSlice = createSlice({
     addConfig: (state, action: PayloadAction<PivotConfig>) => {
       if (action.payload.type === 'column' && state.activeColumnConfig) {
         state.configs = state.configs.filter(
-          d => d.id !== state.activeColumnConfig
+          config => config.id !== state.activeColumnConfig
         );
       }
       state.configs.push(action.payload);
@@ -42,11 +42,13 @@ const pivotConfigSlice = createSlice({
       }
     },
     removeConfig: (state, action: PayloadAction<string>) => {
-      const config = state.configs.find(d => d.id === action.payload);
+      const config = state.configs.find(config => config.id === action.payload);
       if (config?.type === 'column') {
         state.activeColumnConfig = null;
       }
-      state.configs = state.configs.filter(d => d.id !== action.payload);
+      state.configs = state.configs.filter(
+        config => config.id !== action.payload
+      );
       state.activeRowConfigs = state.activeRowConfigs.filter(
         id => id !== action.payload
       );
@@ -58,7 +60,9 @@ const pivotConfigSlice = createSlice({
       state.activeColumnConfig = action.payload;
     },
     updateConfig: (state, action: PayloadAction<PivotConfig>) => {
-      const index = state.configs.findIndex(d => d.id === action.payload.id);
+      const index = state.configs.findIndex(
+        config => config.id === action.payload.id
+      );
       if (index !== -1) {
         // If updating to column type and another column exists, remove the old one
         if (
@@ -67,7 +71,7 @@ const pivotConfigSlice = createSlice({
           state.activeColumnConfig !== action.payload.id
         ) {
           state.configs = state.configs.filter(
-            d => d.id !== state.activeColumnConfig
+            config => config.id !== state.activeColumnConfig
           );
           state.activeColumnConfig = action.payload.id;
         }
