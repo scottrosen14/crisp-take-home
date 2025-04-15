@@ -14,11 +14,14 @@ const pivotConfigSlice = createSlice({
   name: 'pivotConfig',
   initialState,
   reducers: {
-    setActiveRowConfigs: (state, action: PayloadAction<string[]>) => {
-      state.activeRowConfigs = action.payload;
+    setActiveRowConfigs: (configState, action: PayloadAction<string[]>) => {
+      configState.activeRowConfigs = action.payload;
     },
-    setActiveColumnConfig: (state, action: PayloadAction<string | null>) => {
-      state.activeColumnConfig = action.payload;
+    setActiveColumnConfig: (
+      configState,
+      action: PayloadAction<string | null>
+    ) => {
+      configState.activeColumnConfig = action.payload;
     },
   },
 });

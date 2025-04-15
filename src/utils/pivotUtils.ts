@@ -6,28 +6,41 @@ import {
   ColumnGrandTotals,
 } from '../constants/constants';
 
-export const getUniqueColumns = (data: Order[]): string[] => {
-  const stateSet = new Set(data.map(d => d.state));
-  return Array.from(stateSet).sort();
+export const getUniqueColumns = (
+  data: Order[],
+  columnName: string
+): string[] => {
+  const columnSet = new Set(
+    data.map(d => String(d[columnName as keyof Order]))
+  );
+  return Array.from(columnSet).sort();
 };
 
-export const groupPivotRowData = (orders: Order[]): GroupedRowData => {
+export const groupPivotRowData = (
+  orders: Order[],
+  columnName: string
+): GroupedRowData => {
   const grouped: GroupedRowData = {};
 
-  // TODO: these name will need to come from the pivot config state
-  orders.forEach(({ category, subCategory, state, sales }) => {
+  orders.forEach(order => {
+    const category = order.category;
+    const subCategory = order.subCategory;
+    const columnValue = String(order[columnName as keyof Order]);
+    const sales = order.sales;
+
     if (!grouped[category]) {
       grouped[category] = {};
     }
     if (!grouped[category][subCategory]) {
       grouped[category][subCategory] = {};
     }
-    if (!grouped[category][subCategory][state]) {
-      grouped[category][subCategory][state] = 0;
+    if (!grouped[category][subCategory][columnValue]) {
+      grouped[category][subCategory][columnValue] = 0;
     }
     // Round at each addition to prevent floating-point precision errors
-    grouped[category][subCategory][state] =
-      Math.round((grouped[category][subCategory][state] + sales) * 100) / 100;
+    grouped[category][subCategory][columnValue] =
+      Math.round((grouped[category][subCategory][columnValue] + sales) * 100) /
+      100;
   });
 
   return grouped;
