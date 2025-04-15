@@ -1,4 +1,3 @@
-// TODO: Handle these floating points
 import { ColumnValues } from '../constants/constants';
 
 export const mockColumnGrandTotals: ColumnValues = {

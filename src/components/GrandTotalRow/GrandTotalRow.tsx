@@ -8,7 +8,6 @@ interface GrandTotalRowProps {
   ultimateGrandTotal: number;
 }
 
-// TODO: Review locale string
 const GrandTotalRow = ({
   columnGrandTotals,
   ultimateGrandTotal,

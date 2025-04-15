@@ -2,6 +2,8 @@
 
 A React-based application that displays and analyzes data using a pivot table interface. Built with TypeScript, Redux Toolkit, and modern React practices.
 
+![Pivot Table Application Screenshot](./PivotTableScreenshot.png)
+
 ## Features
 
 - Interactive pivot table visualization
