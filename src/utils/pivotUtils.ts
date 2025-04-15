@@ -75,16 +75,20 @@ export const calculateGrandTotals = (
     Object.values(group).forEach((columnValues: ColumnValues) => {
       columns.forEach(columnName => {
         const value = columnValues[columnName] || 0;
-        columnGrandTotals[columnName] = Math.round(
-          columnGrandTotals[columnName] + value
-        );
-        ultimateGrandTotal = Math.round(ultimateGrandTotal + value);
+        columnGrandTotals[columnName] = columnGrandTotals[columnName] + value;
+        ultimateGrandTotal = ultimateGrandTotal + value;
       });
     });
   });
 
+  // Round only at the final step
+  const roundedColumnGrandTotals: ColumnGrandTotals = {};
+  Object.entries(columnGrandTotals).forEach(([key, value]) => {
+    roundedColumnGrandTotals[key] = Math.round(value);
+  });
+
   return {
-    columnGrandTotals: columnGrandTotals,
+    columnGrandTotals: roundedColumnGrandTotals,
     ultimateGrandTotal: Math.round(ultimateGrandTotal),
   };
 };

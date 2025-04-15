@@ -6,8 +6,8 @@ export interface PivotConfigState {
 }
 
 const initialState: PivotConfigState = {
-  activeRowConfigs: ['country', 'region'],
-  activeColumnConfig: 'segment',
+  activeRowConfigs: ['category', 'subCategory'],
+  activeColumnConfig: 'state',
 };
 
 const pivotConfigSlice = createSlice({
