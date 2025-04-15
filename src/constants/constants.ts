@@ -23,15 +23,15 @@ export interface Order {
 }
 
 export interface Group {
-  [subGroup: string]: ColumnMetrics;
+  [subGroup: string]: ColumnValues;
 }
 
 export interface GroupedRowData {
   [group: string]: Group;
 }
 
-export interface ColumnMetrics {
+export interface ColumnValues {
   [column: string]: number;
 }
 
-export type ColumnGrandTotals = ColumnMetrics;
+export type ColumnGrandTotals = ColumnValues;

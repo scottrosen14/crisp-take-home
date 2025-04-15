@@ -3,13 +3,13 @@ import {
   tdStyle,
   categoryStyle as groupStyle,
 } from '../../PivotBody/PivotBody.styles';
-import { ColumnMetrics } from '../../../constants/constants';
+import { ColumnValues } from '../../../constants/constants';
 
-type SubGroupEntry = [string, ColumnMetrics];
+type SubGroupEntry = [string, ColumnValues];
 
 interface Props {
   groupName: string;
-  subGroups: Record<string, ColumnMetrics>;
+  subGroups: Record<string, ColumnValues>;
   columns: string[];
 }
 

@@ -1,5 +1,5 @@
 import {
-  ColumnMetrics,
+  ColumnValues,
   Order,
   GroupedRowData,
   Group,
@@ -43,7 +43,7 @@ export const calculateGrandTotals = (
 
   // TODO: Optimize this; Cannot have triple nested loops
   Object.values(groupedRows).forEach((group: Group) => {
-    Object.values(group).forEach((columnValues: ColumnMetrics) => {
+    Object.values(group).forEach((columnValues: ColumnValues) => {
       columns.forEach(columnName => {
         const value = columnValues[columnName] || 0;
         columnGrandTotals[columnName] = Number(
@@ -63,24 +63,24 @@ export const calculateGrandTotals = (
 export const calculateGroupTotals = (
   columns: string[],
   subGroups: Group
-): { groupTotalsByColumn: ColumnMetrics; groupGrandTotal: number } => {
-  const groupTotalsByColumn: ColumnMetrics = {};
+): { groupedTotalsByColumn: ColumnValues; groupGrandTotal: number } => {
+  const groupTotalsByColumn: ColumnValues = {};
   let groupGrandTotal = 0;
 
   columns.forEach(state => {
     groupTotalsByColumn[state] = 0;
   });
 
-  Object.values(subGroups).forEach(stateValues => {
-    columns.forEach(state => {
-      const value = stateValues[state] || 0;
-      groupTotalsByColumn[state] += value;
+  Object.values(subGroups).forEach((columnValues: ColumnValues) => {
+    columns.forEach((columnName: string) => {
+      const value = columnValues[columnName] || 0;
+      groupTotalsByColumn[columnName] += value;
       groupGrandTotal += value;
     });
   });
 
   return {
-    groupTotalsByColumn,
-    groupGrandTotal,
+    groupedTotalsByColumn: groupTotalsByColumn,
+    groupGrandTotal: Math.round(groupGrandTotal),
   };
 };

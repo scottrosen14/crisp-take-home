@@ -8,7 +8,7 @@ import GroupTotalRow from './GroupTotalRow/GroupTotalRow';
 import GroupMetricRows from './GroupMetricRows/GroupMetricRows';
 import { useAppSelector } from '../../redux/store';
 import { selectGroupTotals } from '../../redux/features/orders/ordersSelectors';
-import { Group, ColumnMetrics } from '../../constants/constants';
+import { Group, ColumnValues } from '../../constants/constants';
 
 interface Props {
   groupName: string;
@@ -17,9 +17,8 @@ interface Props {
 }
 
 const GroupRows = ({ groupName, subGroups, columns }: Props): ReactElement => {
-  const { groupTotalsByColumn, groupGrandTotal } = useAppSelector(state =>
-    selectGroupTotals(state, groupName, subGroups)
-  );
+  const { groupedTotalsByColumn: groupTotalsByColumn, groupGrandTotal } =
+    useAppSelector(state => selectGroupTotals(state, groupName, subGroups));
 
   return (
     <Fragment data-testid={`${groupName}-group-rows`} key={groupName}>
