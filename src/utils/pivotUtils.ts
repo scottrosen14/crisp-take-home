@@ -16,34 +16,48 @@ export const getUniqueColumns = (
   return Array.from(columnSet).sort();
 };
 
+type NestedGroup = {
+  [key: string]: NestedGroup | ColumnValues;
+};
+
 export const groupPivotRowData = (
   orders: Order[],
-  columnName: string
+  columnName: string,
+  rowConfigs: string[]
 ): GroupedRowData => {
-  const grouped: GroupedRowData = {};
+  const grouped: NestedGroup = {};
 
   orders.forEach(order => {
-    const category = order.category;
-    const subCategory = order.subCategory;
-    const columnValue = String(order[columnName as keyof Order]);
-    const sales = order.sales;
+    let currentGroup = grouped;
 
-    if (!grouped[category]) {
-      grouped[category] = {};
-    }
-    if (!grouped[category][subCategory]) {
-      grouped[category][subCategory] = {};
-    }
-    if (!grouped[category][subCategory][columnValue]) {
-      grouped[category][subCategory][columnValue] = 0;
-    }
-    // Round at each addition to prevent floating-point precision errors
-    grouped[category][subCategory][columnValue] =
-      Math.round((grouped[category][subCategory][columnValue] + sales) * 100) /
-      100;
+    rowConfigs.forEach((config, index) => {
+      const value = String(order[config as keyof Order]);
+
+      if (index === rowConfigs.length - 1) {
+        // Last level - add the column values
+        if (!currentGroup[value]) {
+          currentGroup[value] = {};
+        }
+        const columnValue = String(order[columnName as keyof Order]);
+        if (!(currentGroup[value] as ColumnValues)[columnValue]) {
+          (currentGroup[value] as ColumnValues)[columnValue] = 0;
+        }
+        (currentGroup[value] as ColumnValues)[columnValue] =
+          Math.round(
+            ((currentGroup[value] as ColumnValues)[columnValue] + order.sales) *
+              100
+          ) / 100;
+      } else {
+        // Intermediate level - create nested structure
+        if (!currentGroup[value]) {
+          currentGroup[value] = {};
+        }
+        currentGroup = currentGroup[value] as NestedGroup;
+      }
+    });
   });
 
-  return grouped;
+  return grouped as GroupedRowData;
 };
 
 export const calculateGrandTotals = (

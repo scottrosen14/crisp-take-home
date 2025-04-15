@@ -5,7 +5,10 @@ import {
   calculateGroupTotals,
   calculateGrandTotals,
 } from '../../../utils/pivotUtils';
-import { selectActiveColumnConfig } from '../pivotConfig/pivotConfigSelectors';
+import {
+  selectActiveColumnConfig,
+  selectActiveRowConfigs,
+} from '../pivotConfig/pivotConfigSelectors';
 
 export const selectOrders = (state: RootState) => state.ordersReducer.orders;
 export const selectLoading = (state: RootState) => state.ordersReducer.loading;
@@ -19,8 +22,13 @@ export const selectUniqueColumns = (state: RootState) => {
 
 export const selectPivotRows = (state: RootState) => {
   const columnConfig = selectActiveColumnConfig(state);
-  if (!columnConfig) return {};
-  return groupPivotRowData(state.ordersReducer.orders, columnConfig);
+  const rowConfigs = selectActiveRowConfigs(state);
+  if (!columnConfig || !rowConfigs.length) return {};
+  return groupPivotRowData(
+    state.ordersReducer.orders,
+    columnConfig,
+    rowConfigs
+  );
 };
 
 export const selectGroupTotals = (
@@ -31,8 +39,8 @@ export const selectGroupTotals = (
   return calculateGroupTotals(columns, subGroups);
 };
 
-export const selectGrandTotals = (columnName: RootState) => {
-  const pivotRows = selectPivotRows(columnName);
-  const columns = selectUniqueColumns(columnName);
+export const selectGrandTotals = (state: RootState) => {
+  const pivotRows = selectPivotRows(state);
+  const columns = selectUniqueColumns(state);
   return calculateGrandTotals(pivotRows, columns);
 };
