@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Order } from '../../../constants/constants';
 import { fetchOrdersThunk } from './fetchOrdersThunk';
+import { RootState } from '../../store';
 
 interface OrdersState {
   orders: Order[];
@@ -39,4 +40,9 @@ const ordersSlice = createSlice({
   },
 });
 
-export default ordersSlice.reducer;
+export default ordersSlice;
+
+// Selectors
+export const selectOrders = (state: RootState) => state.ordersReducer.orders;
+export const selectLoading = (state: RootState) => state.ordersReducer.loading;
+export const selectError = (state: RootState) => state.ordersReducer.error;
