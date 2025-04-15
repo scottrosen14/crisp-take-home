@@ -1,17 +1,4 @@
-import { PivotConfig, PivotConfigState } from './pivotConfigSlice';
-
-export const selectAllConfigs = (state: { pivotConfig: PivotConfigState }) =>
-  state.pivotConfig.configs;
-
-export const selectRowConfigs = (state: { pivotConfig: PivotConfigState }) =>
-  state.pivotConfig.configs.filter(
-    (config: PivotConfig) => config.type === 'row'
-  );
-
-export const selectColumnConfig = (state: { pivotConfig: PivotConfigState }) =>
-  state.pivotConfig.configs.find(
-    (config: PivotConfig) => config.id === state.pivotConfig.activeColumnConfig
-  );
+import { PivotConfigState } from './pivotConfigSlice';
 
 export const selectActiveRowConfigs = (state: {
   pivotConfig: PivotConfigState;
@@ -24,13 +11,10 @@ export const selectActiveColumnConfig = (state: {
 export const selectActiveConfigs = (state: {
   pivotConfig: PivotConfigState;
 }) => {
-  const activeConfigs = [
+  return [
     ...state.pivotConfig.activeRowConfigs,
     ...(state.pivotConfig.activeColumnConfig
       ? [state.pivotConfig.activeColumnConfig]
       : []),
   ];
-  return state.pivotConfig.configs.filter((config: PivotConfig) =>
-    activeConfigs.includes(config.id)
-  );
 };
