@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Order } from '../../../constants/constants';
 
 export interface PivotConfigState {
-  activeRowConfigs: string[];
-  activeColumnConfig: string | null;
+  activeRowConfigs: (keyof Order)[];
+  activeColumnConfig: keyof Order | null;
 }
 
 const initialState: PivotConfigState = {
@@ -14,12 +15,15 @@ const pivotConfigSlice = createSlice({
   name: 'pivotConfig',
   initialState,
   reducers: {
-    setActiveRowConfigs: (configState, action: PayloadAction<string[]>) => {
+    setActiveRowConfigs: (
+      configState,
+      action: PayloadAction<(keyof Order)[]>
+    ) => {
       configState.activeRowConfigs = action.payload;
     },
     setActiveColumnConfig: (
       configState,
-      action: PayloadAction<string | null>
+      action: PayloadAction<keyof Order | null>
     ) => {
       configState.activeColumnConfig = action.payload;
     },

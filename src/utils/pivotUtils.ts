@@ -22,37 +22,29 @@ type NestedGroup = {
 
 export const groupPivotRowData = (
   orders: Order[],
-  columnName: string,
-  rowConfigs: string[]
+  columnFilter: keyof Order,
+  rowFilters: (keyof Order)[]
 ): GroupedRowData => {
   const grouped: NestedGroup = {};
 
-  orders.forEach(order => {
+  orders.forEach((order: Order) => {
     let currentGroup = grouped;
 
-    rowConfigs.forEach((config, index) => {
-      const value = String(order[config as keyof Order]);
+    rowFilters.forEach((rowFilter: keyof Order, index: number) => {
+      if (index === rowFilters.length - 1) {
+        const row = String(order[rowFilter]);
+        currentGroup[row] = currentGroup[row] || {};
 
-      if (index === rowConfigs.length - 1) {
-        // Last level - add the column values
-        if (!currentGroup[value]) {
-          currentGroup[value] = {};
-        }
-        const columnValue = String(order[columnName as keyof Order]);
-        if (!(currentGroup[value] as ColumnValues)[columnValue]) {
-          (currentGroup[value] as ColumnValues)[columnValue] = 0;
-        }
-        (currentGroup[value] as ColumnValues)[columnValue] =
+        const column = String(order[columnFilter]);
+        currentGroup[row][column] = currentGroup[row][column] || 0;
+        currentGroup[row][column] =
           Math.round(
-            ((currentGroup[value] as ColumnValues)[columnValue] + order.sales) *
-              100
+            ((currentGroup[row][column] as number) + order.sales) * 100
           ) / 100;
       } else {
-        // Intermediate level - create nested structure
-        if (!currentGroup[value]) {
-          currentGroup[value] = {};
-        }
-        currentGroup = currentGroup[value] as NestedGroup;
+        const rowGroup = String(order[rowFilter]);
+        currentGroup[rowGroup] = currentGroup[rowGroup] || {};
+        currentGroup = currentGroup[rowGroup] as NestedGroup;
       }
     });
   });
