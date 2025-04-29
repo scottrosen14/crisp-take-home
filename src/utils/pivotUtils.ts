@@ -7,18 +7,18 @@ import {
 } from '../constants/constants';
 
 export const getUniqueColumns = (
-  data: Order[],
-  columnName: string
+  orders: Order[],
+  columnFilter: keyof Order
 ): string[] => {
-  const columnSet = new Set(
-    data.map(d => String(d[columnName as keyof Order]))
-  );
+  const columnSet = new Set(orders.map(order => String(order[columnFilter])));
   return Array.from(columnSet).sort();
 };
 
-type NestedGroup = {
-  [key: string]: NestedGroup | ColumnValues;
-};
+interface NestedGroup {
+  [group: string]: NestedGroup | ColumnValues;
+}
+
+const roundNumber = (num: number) => Math.round(num * 100) / 100;
 
 export const groupPivotRowData = (
   orders: Order[],
@@ -37,10 +37,9 @@ export const groupPivotRowData = (
 
         const column = String(order[columnFilter]);
         currentGroup[row][column] = currentGroup[row][column] || 0;
-        currentGroup[row][column] =
-          Math.round(
-            ((currentGroup[row][column] as number) + order.sales) * 100
-          ) / 100;
+        currentGroup[row][column] = roundNumber(
+          (currentGroup[row][column] as number) + order.sales
+        );
       } else {
         const rowGroup = String(order[rowFilter]);
         currentGroup[rowGroup] = currentGroup[rowGroup] || {};
