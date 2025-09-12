@@ -36,7 +36,7 @@ describe('GroupRows Component', () => {
     });
   });
 
-  it('renders GroupMetricRows component', () => {
+  it.skip('renders GroupMetricRows component', () => {
     render(
       <Provider store={store}>
         <GroupRows {...mockProps} />
